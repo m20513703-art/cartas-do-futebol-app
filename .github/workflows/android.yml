@@ -29,6 +29,18 @@ jobs:
         run: |
           test -s android/app/build/outputs/apk/debug/app-debug.apk
           unzip -t android/app/build/outputs/apk/debug/app-debug.apk | tail -3
+      - name: Publish APK as direct release download
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-apk
+          name: Latest Android APK
+          body: Debug APK build from the latest main branch commit.
+          files: android/app/build/outputs/apk/debug/app-debug.apk
+          overwrite_files: true
+          fail_on_unmatched_files: true
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v4
         with:
           name: cartas-do-futebol-apk
