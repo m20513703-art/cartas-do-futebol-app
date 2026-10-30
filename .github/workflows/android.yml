@@ -35,7 +35,7 @@ jobs:
           $ANDROID_HOME/build-tools/35.0.0/aapt dump badging "$APK" | head -5
           $ANDROID_HOME/build-tools/35.0.0/apksigner verify --verbose "$APK"
           mkdir -p release
-          cp "$APK" release/Cartas-do-Futebol-v1.0.2-release.apk
+          cp "$APK" release/Futebol-Top-v1.0.3-release.apk
           echo 'passed=true' >> "$GITHUB_OUTPUT"
       - name: Optional Android emulator smoke test
         id: emulator
@@ -59,35 +59,31 @@ jobs:
               sleep 5
             done
             if [ "$ready" != 1 ]; then
-              echo 'Emulator did not become ready; publishing remains based on static APK checks.'
+              echo 'Emulator unavailable; static APK checks passed.'
               adb devices -l > "$GITHUB_WORKSPACE/release/adb-devices.txt" || true
               exit 1
             fi
             adb logcat -c
-            adb install "$GITHUB_WORKSPACE/release/Cartas-do-Futebol-v1.0.2-release.apk"
-            printf 'installed\n' > "$GITHUB_WORKSPACE/release/install.marker"
+            adb install "$GITHUB_WORKSPACE/release/Futebol-Top-v1.0.3-release.apk"
             adb shell am force-stop com.mmsistemastecnologia.cartasfutebol || true
             adb shell monkey -p com.mmsistemastecnologia.cartasfutebol 1
-            printf 'launched\n' > "$GITHUB_WORKSPACE/release/launch.marker"
             sleep 20
-            adb shell dumpsys activity activities > "$GITHUB_WORKSPACE/release/activities.txt"
-            adb exec-out screencap -p > "$GITHUB_WORKSPACE/release/cartas-screen.png" || true
             adb logcat -d -t 10000 > "$GITHUB_WORKSPACE/release/logcat.txt"
             if grep -E 'FATAL EXCEPTION|Unable to load script|Could not connect to development server' "$GITHUB_WORKSPACE/release/logcat.txt"; then exit 1; fi
       - name: Upload diagnostic evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cartas-futebol-release-evidence
+          name: futebol-top-release-evidence
           path: release/
           if-no-files-found: warn
       - name: Publish direct APK release
         if: steps.staticcheck.outputs.passed == 'true'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: apk-v1.0.2-release
-          name: Cartas do Futebol v1.0.2 (APK Release)
-          files: release/Cartas-do-Futebol-v1.0.2-release.apk
+          tag_name: apk-v1.0.3-release
+          name: Futebol Top v1.0.3 (APK Release)
+          files: release/Futebol-Top-v1.0.3-release.apk
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
