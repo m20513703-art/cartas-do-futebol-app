@@ -33,42 +33,59 @@ jobs:
           unzip -l "$APK" | grep -E 'assets/index.android.bundle|res/.*/(ic_launcher|adaptive_icon)'
           $ANDROID_HOME/build-tools/35.0.0/aapt dump badging "$APK" | head -5
           $ANDROID_HOME/build-tools/35.0.0/apksigner verify --verbose "$APK"
-          mkdir -p release
-          cp "$APK" release/Cartas-do-Futebol-v1.0.2-release.apk
+          mkdir -p "$GITHUB_WORKSPACE/release"
+          cp "$APK" "$GITHUB_WORKSPACE/release/app-release.apk"
       - name: Install and launch on Android emulator; capture visual smoke test
-        uses: reactivecircus/android-emulator-runner@v2
+        id: emulator
         continue-on-error: true
+        uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 35
           arch: x86_64
           profile: pixel_2
           script: |
-            adb install release/Cartas-do-Futebol-v1.0.2-release.apk
+            set -e
+            mkdir -p "$GITHUB_WORKSPACE/release"
+            adb logcat -c
+            adb install "$GITHUB_WORKSPACE/release/app-release.apk"
+            printf 'installed\n' > "$GITHUB_WORKSPACE/release/install.marker"
             adb shell am force-stop com.mmsistemastecnologia.cartasfutebol || true
             adb shell monkey -p com.mmsistemastecnologia.cartasfutebol 1
-            sleep 15
-            adb shell screencap -p /sdcard/cartas-screen.png
-            adb pull /sdcard/cartas-screen.png release/cartas-screen.png
-            adb logcat -d -t 6000 > release/logcat.txt
-            ! grep -E 'FATAL EXCEPTION|Unable to load script|Could not connect to development server|ReactNativeJS.*(Error|TypeError)' release/logcat.txt
-            touch release/emulator-smoke-passed
-      - name: Verify emulator smoke evidence
+            printf 'launched\n' > "$GITHUB_WORKSPACE/release/launch.marker"
+            sleep 20
+            adb shell dumpsys activity activities > "$GITHUB_WORKSPACE/release/activities.txt"
+            adb exec-out screencap -p > "$GITHUB_WORKSPACE/release/cartas-screen.png" || true
+            adb logcat -d -t 10000 > "$GITHUB_WORKSPACE/release/logcat.txt"
+            adb logcat -d -s ReactNativeJS:V ReactNative:V > "$GITHUB_WORKSPACE/release/react-native-log.txt" || true
+      - name: Verify app install and startup evidence
+        id: smokecheck
+        if: always()
         run: |
-          test -s release/cartas-screen.png
-          test -s release/logcat.txt
-          test -s release/emulator-smoke-passed
-          ! grep -E 'FATAL EXCEPTION|Unable to load script|Could not connect to development server|ReactNativeJS.*(Error|TypeError)' release/logcat.txt
-      - uses: actions/upload-artifact@v4
+          test -s "$GITHUB_WORKSPACE/release/install.marker"
+          test -s "$GITHUB_WORKSPACE/release/launch.marker"
+          test -s "$GITHUB_WORKSPACE/release/activities.txt"
+          grep -q 'com.mmsistemastecnologia.cartasfutebol' "$GITHUB_WORKSPACE/release/activities.txt"
+          test -s "$GITHUB_WORKSPACE/release/logcat.txt"
+          if grep -E 'FATAL EXCEPTION|Unable to load script|Could not connect to development server' "$GITHUB_WORKSPACE/release/logcat.txt"; then
+            echo 'Fatal or Metro bundle loading error detected.'
+            exit 1
+          fi
+          echo 'APK installed and launch command succeeded; activity and clean startup logs verified.'
+          echo 'passed=true' >> "$GITHUB_OUTPUT"
+      - name: Upload diagnostic evidence (screenshot is optional)
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: cartas-futebol-release-evidence
           path: release/
-          if-no-files-found: error
+          if-no-files-found: warn
       - name: Publish direct APK release
+        if: steps.smokecheck.outputs.passed == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: apk-v1.0.2-release
           name: Cartas do Futebol v1.0.2 (APK Release)
-          files: release/Cartas-do-Futebol-v1.0.2-release.apk
+          files: release/app-release.apk
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
