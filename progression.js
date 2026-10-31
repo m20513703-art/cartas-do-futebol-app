@@ -12,7 +12,7 @@ function completeLeague(prog, key, summary, club) {
     next.pendingTier = promoted.includes(club) ? 'C' : 'D';
   } else if (key === 'C') {
     next.rosters.B = summary.promotedTeams || [];
-    next.rosters.serieD = summary.relegatedTeams || [];
+    next.rosters.serieD = [...new Set([...(summary.relegatedTeams || []), ...(next.stateLeagueQualifications || []).filter(x => x.status === 'next-edition').map(x => x.club)])];
     next.pendingTier = summary.clubOutcome?.nextDivision || 'C';
   } else if (key === 'B') {
     next.rosters.A = summary.promotedTeams || [];
@@ -27,6 +27,23 @@ function completeLeague(prog, key, summary, club) {
     next.rosters.sulAmericana = summary.sulAmericana || [];
   }
   return next;
+}
+function recordStateLeagueQualification(prog, club, position, season = null) {
+  const next = { ...prog, rosters: { ...(prog.rosters || {}) }, eligibility: { ...(prog.eligibility || {}) }, pendingEligibility: { ...(prog.pendingEligibility || {}) } };
+  // Legacy state-league season standings feed the next edition of the separate
+  // national-tournament progression. No qualification is granted outside 1st/2nd.
+  const qualified = Number.isInteger(position) && position >= 1 && position <= 2;
+  const priorQualification = (next.stateLeagueQualifications || []).some(x => x.club === club && x.status === 'next-edition');
+  next.stateLeagueQualifications = (next.stateLeagueQualifications || []).filter(x => x.club !== club);
+  if (qualified) {
+    next.rosters.serieD = addClub(next.rosters.serieD, club);
+    next.pendingEligibility.serieD = true;
+    next.stateLeagueQualifications.push({ club, position, season, competition: 'estadual', destination: 'Série D', status: 'next-edition' });
+  } else if (priorQualification) {
+    next.rosters.serieD = (next.rosters.serieD || []).filter(name => name.trim().toLowerCase() !== club.trim().toLowerCase());
+    if (!next.rosters.serieD.length) delete next.rosters.serieD;
+  }
+  return { progression: next, qualified, position, season };
 }
 function awardStateCup(prog, club, champion, runnerUp, championChoice = null) {
   const next = { ...prog, rosters: { ...(prog.rosters || {}) }, eligibility: { ...(prog.eligibility || {}) }, pendingEligibility: { ...(prog.pendingEligibility || {}) } };
@@ -56,4 +73,4 @@ function beginNextEdition(prog) {
   next.pendingEligibility = {};
   return next;
 }
-module.exports = { makeProgression, completeLeague, awardStateCup, beginNextEdition, unfinishedCompetitions };
+module.exports = { makeProgression, completeLeague, recordStateLeagueQualification, awardStateCup, beginNextEdition, unfinishedCompetitions };

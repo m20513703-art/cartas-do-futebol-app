@@ -93,4 +93,37 @@ const guard = P.unfinishedCompetitions({ C: { eligible: true }, copaBrasil: { el
 assert.deepEqual(guard, ['C', 'estadual'], 'only unfinished competitions eligible in current season block rollover');
 const choicePending = P.unfinishedCompetitions({ estadual: { eligible: true, done: true, waitingChoice: true } }, item => item.done && !item.waitingChoice);
 assert.deepEqual(choicePending, ['estadual'], 'unresolved champion choice blocks season rollover');
+// The legacy state-league table is the source for two next-edition Série D places.
+for (const position of [1, 2]) {
+  let stateProgress = P.makeProgression('D');
+  const qualification = P.recordStateLeagueQualification(stateProgress, club, position, 2026);
+  stateProgress = JSON.parse(JSON.stringify(qualification.progression));
+  assert.equal(qualification.qualified, true);
+  assert(stateProgress.rosters.serieD.includes(club));
+  assert.equal(stateProgress.eligibility.serieD, true, 'current D stays accessible, next state qualification is queued');
+  assert.equal(stateProgress.pendingEligibility.serieD, true);
+  const following = P.beginNextEdition(JSON.parse(JSON.stringify(stateProgress)));
+  assert.equal(following.tier, 'D');
+  assert(following.rosters.serieD.includes(club), '1st/2nd state-league finisher enters next D roster');
+  assert.equal(following.eligibility.serieD, true);
+}
+for (const position of [3, 20]) {
+  const stateProgress = P.recordStateLeagueQualification(P.makeProgression('D'), club, position, 2026).progression;
+  const following = P.beginNextEdition(JSON.parse(JSON.stringify(stateProgress)));
+  assert.equal(stateProgress.pendingEligibility.serieD, undefined, 'positions outside top two do not receive state-league D eligibility');
+  assert(!following.rosters.serieD?.includes(club), 'non-top-two club is not added as a state-league qualifier');
+}
+// State-cup award remains distinct and both choices continue to assign the other prize to runner-up.
+for (const choice of ['serieD', 'copaBrasil']) {
+  const awards = P.awardStateCup(P.makeProgression('D'), club, club, 'Vice', choice);
+  const choiceName = choice === 'serieD' ? 'Série D' : 'Copa do Brasil';
+  const otherName = choice === 'serieD' ? 'copaBrasil' : 'serieD';
+  assert(awards.progression.rosters[choice].includes(club));
+  assert(awards.progression.rosters[otherName].includes('Vice'));
+  assert.equal(awards.runnerUpGets, otherName);
+  const savedAwards = JSON.parse(JSON.stringify(awards.progression));
+  const nextEdition = P.beginNextEdition(savedAwards);
+  assert.equal(nextEdition.eligibility[choice], true);
+  assert(nextEdition.rosters[choice].includes(club));
+}
 console.log('Career integration journey D→C→B→A, pending promotion/relegation, annual qualification rollover and JSON persistence passed.');
