@@ -1,6 +1,7 @@
 'use strict';
 
-const FORMATS = Object.freeze({ estadual: 4, copaBrasil: 16, libertadores: 16, sulAmericana: 16 });
+const FORMATS = Object.freeze({ estadual: 4, copaPaulista: 4, copaRio: 4, copaBrasil: 16, libertadores: 16, sulAmericana: 16 });
+const STATE_CUP_TYPES = Object.freeze(['estadual', 'copaPaulista', 'copaRio']);
 const TYPES = Object.keys(FORMATS);
 const CHOICES = Object.freeze(['serieD', 'copaBrasil']);
 
@@ -86,7 +87,7 @@ function advanceIfReady(state) {
     state.completed = true;
     state.champion = winners[0];
     state.runnerUp = round.matches[0].home === winners[0] ? round.matches[0].away : round.matches[0].home;
-    if (state.type === 'estadual') {
+    if (STATE_CUP_TYPES.includes(state.type)) {
       state.qualification = { champion: state.champion, runnerUp: state.runnerUp, championChoice: null, championGets: null, runnerUpGets: null, availableChoices: [...CHOICES], requiresChampionChoice: true };
     }
     return;
@@ -99,7 +100,7 @@ function create({ type, club, teams = [], season, stateName } = {}) {
   club = validateClub(club);
   if (!Array.isArray(teams)) throw new TypeError('teams deve ser um array.');
   if (season === undefined || season === null || String(season).trim() === '') throw new TypeError('season é obrigatório.');
-  if (type === 'estadual' && (typeof stateName !== 'string' || !stateName.trim())) throw new TypeError('stateName é obrigatório para estadual.');
+  if (STATE_CUP_TYPES.includes(type) && (typeof stateName !== 'string' || !stateName.trim())) throw new TypeError('stateName é obrigatório para estadual.');
   let names = teams.map(teamName);
   if (names.some(n => !n)) throw new TypeError('Nome de clube vazio em teams.');
   if (!names.includes(club)) names.unshift(club);
@@ -149,7 +150,7 @@ function playMatch(state, club, homeGoals, awayGoals) {
   return next;
 }
 function chooseStateCup(state, championClub, choice) {
-  if (!state || state.schema !== 'futebol-top-cup-v1' || state.type !== 'estadual') throw new TypeError('A escolha de vaga só se aplica a um estadual.');
+  if (!state || state.schema !== 'futebol-top-cup-v1' || !STATE_CUP_TYPES.includes(state.type)) throw new TypeError('A escolha de vaga só se aplica a uma copa estadual configurada.');
   if (!state.completed || !state.qualification) throw new Error('O estadual ainda não terminou.');
   if (championClub !== state.champion || championClub !== state.club) throw new Error('Somente o clube usuário campeão pode registrar sua escolha.');
   if (!CHOICES.includes(choice)) throw new TypeError(`choice deve ser ${CHOICES.join(' ou ')}.`);

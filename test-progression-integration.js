@@ -78,6 +78,16 @@ p = P.beginNextEdition(p);
 assert.equal(p.eligibility.libertadores, true);
 assert.equal(p.pendingEligibility.libertadores, undefined);
 assert(p.rosters.libertadores.includes(club));
+// A later state-league finish outside top two removes a previous pending state place.
+let stateRepeat = P.recordStateLeagueQualification(P.makeProgression('D'), club, 1, 2026).progression;
+stateRepeat = P.recordStateLeagueQualification(stateRepeat, club, 3, 2027).progression;
+assert(!stateRepeat.rosters.serieD?.includes(club), 'out-of-top-two next season revokes a prior state-league place');
+assert(!P.beginNextEdition(JSON.parse(JSON.stringify(stateRepeat))).rosters.serieD?.includes(club));
+// A later state-league finish outside top two removes a previous pending state place.
+let stateRepeat = P.recordStateLeagueQualification(P.makeProgression('D'), club, 1, 2026).progression;
+stateRepeat = P.recordStateLeagueQualification(stateRepeat, club, 3, 2027).progression;
+assert(!stateRepeat.rosters.serieD?.includes(club), 'out-of-top-two next season revokes a prior state-league place');
+assert(!P.beginNextEdition(JSON.parse(JSON.stringify(stateRepeat))).rosters.serieD?.includes(club));
 // State cup winner's choice is recorded for the next edition, not enabled in-season.
 let cup = P.awardStateCup(p, club, club, 'Runner FC', 'copaBrasil');
 assert.equal(cup.progression.eligibility.copaBrasil, false, 'new state-cup qualification must stay pending until next edition')

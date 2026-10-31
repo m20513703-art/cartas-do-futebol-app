@@ -89,6 +89,16 @@ for (const type of ['copaBrasil', 'libertadores', 'sulAmericana']) {
 }
 assert.throws(() => cups.create({ type: 'estadual', club: 'MM FC', teams: [], season: 2026 }), /stateName/);
 assert.throws(() => cups.create({ type: 'liga', club: 'MM FC', teams: [], season: 2026 }), /type/);
+for (const [type, stateName] of [['copaPaulista', 'Copa Paulista'], ['copaRio', 'Copa Rio de Janeiro (Copa Rio)']]) {
+  let namedCup = cups.create({ type, club: 'MM FC', teams: ['MM FC', 'Rival A', 'Rival B', 'Rival C'], season: 2026, stateName });
+  namedCup = playToEnd(namedCup, () => [3, 0]);
+  assert(namedCup.qualification?.requiresChampionChoice, `${type} records champion/runner-up vacancy choice`);
+  if (namedCup.champion === 'MM FC') {
+    namedCup = cups.chooseStateCup(namedCup, 'MM FC', 'copaBrasil');
+    assert.equal(namedCup.qualification.championGets, 'copaBrasil');
+    assert.equal(namedCup.qualification.runnerUpGets, 'serieD');
+  }
+}
 assert.throws(() => cups.playMatch(novoAno, 'MM FC', -1, 0), /inteiros não negativos/);
 assert.throws(() => cups.getNextMatch(novoAno, 'Outro FC'), /não corresponde/);
 console.log('OK: copas.js — progressão, eliminação, pênaltis, temporadas, resultados, JSON e escolha de vaga.');
