@@ -35,22 +35,22 @@ jobs:
           $ANDROID_HOME/build-tools/35.0.0/aapt dump badging "$APK" | head -5
           $ANDROID_HOME/build-tools/35.0.0/apksigner verify --verbose "$APK"
           mkdir -p release
-          cp "$APK" release/Futebol-Top-v1.3.0-release.apk
+          cp "$APK" release/Futebol-Top-v1.3.1-release.apk
           echo 'passed=true' >> "$GITHUB_OUTPUT"
       - name: Upload diagnostic evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: futebol-top-v1.3.0-apk
+          name: futebol-top-v1.3.1-apk
           path: release/
           if-no-files-found: warn
       - name: Publish direct APK release
         if: steps.staticcheck.outputs.passed == 'true'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: apk-v1.3.0-release
-          name: Futebol Top v1.3.0
-          files: release/Futebol-Top-v1.3.0-release.apk
+          tag_name: apk-v1.3.1-release
+          name: Futebol Top v1.3.1
+          files: release/Futebol-Top-v1.3.1-release.apk
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
