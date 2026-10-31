@@ -49,17 +49,16 @@ function awardStateCup(prog, club, champion, runnerUp, championChoice = null) {
   const next = { ...prog, rosters: { ...(prog.rosters || {}) }, eligibility: { ...(prog.eligibility || {}) }, pendingEligibility: { ...(prog.pendingEligibility || {}) } };
   let choice = championChoice;
   if (champion !== club && !choice) choice = 'serieD';
-  if (champion === club && choice) {
-    const award = choice === 'serieD' ? 'serieD' : 'copaBrasil';
-    next.pendingEligibility[award] = true;
-    next.rosters[award] = addClub(next.rosters[award], club);
-  }
-  if (runnerUp === club) {
-    const award = choice === 'serieD' ? 'copaBrasil' : 'serieD';
-    next.pendingEligibility[award] = true;
-    next.rosters[award] = addClub(next.rosters[award], club);
-  }
-  return { progression: next, championChoice: choice, runnerUpGets: choice === 'serieD' ? 'copaBrasil' : 'serieD' };
+  if (!['serieD', 'copaBrasil'].includes(choice)) throw new TypeError('A escolha do campeão deve ser serieD ou copaBrasil.');
+  const championAward = choice;
+  const runnerUpAward = choice === 'serieD' ? 'copaBrasil' : 'serieD';
+  // Keep both real awardees in the competition rosters; eligibility is only
+  // unlocked for the user's club when it is one of the two awardees.
+  next.rosters[championAward] = addClub(next.rosters[championAward], champion);
+  next.rosters[runnerUpAward] = addClub(next.rosters[runnerUpAward], runnerUp);
+  if (champion === club) next.pendingEligibility[championAward] = true;
+  if (runnerUp === club) next.pendingEligibility[runnerUpAward] = true;
+  return { progression: next, championChoice: choice, championGets: championAward, runnerUpGets: runnerUpAward };
 }
 function unfinishedCompetitions(tournaments, isFinished) {
   return Object.entries(tournaments || {}).filter(([key, item]) => item?.eligible && !isFinished(item, key)).map(([key]) => key);

@@ -131,4 +131,21 @@ for (const choice of ['serieD', 'copaBrasil']) {
   assert.equal(nextEdition.eligibility[choice], true);
   assert(nextEdition.rosters[choice].includes(club));
 }
-console.log('Career integration journey D→C→B→A, pending promotion/relegation, annual qualification rollover and JSON persistence passed.');
+// Copa Paulista and Copa Rio keep separate names and award champion choice + runner-up's other slot.
+const Cups = require('./copas');
+for (const [type, stateName] of [['copaPaulista', 'Copa Paulista'], ['copaRio', 'Copa Rio de Janeiro (Copa Rio)']]) {
+  let stateCup = Cups.create({ type, club, teams: [club, 'Rival A', 'Rival B', 'Rival C'], season: 2027, stateName });
+  while (!stateCup.completed) {
+    const match = Cups.getNextMatch(stateCup, club);
+    stateCup = Cups.playMatch(stateCup, club, match.home === club ? 5 : 0, match.away === club ? 0 : 5);
+  }
+  assert.equal(stateCup.champion, club, `${type}: user wins cup`);
+  stateCup = Cups.chooseStateCup(stateCup, club, 'copaBrasil');
+  const cupSummary = Cups.summarize(JSON.parse(JSON.stringify(stateCup)), club);
+  const award = P.awardStateCup(P.makeProgression('D'), club, cupSummary.champion, cupSummary.runnerUp, cupSummary.qualification.championChoice);
+  assert(award.progression.rosters.copaBrasil.includes(club), `${type}: champion receives Copa do Brasil`);
+  assert(award.progression.rosters.serieD.includes(cupSummary.runnerUp), `${type}: runner-up receives Série D`);
+  assert.equal(award.progression.pendingEligibility.copaBrasil, true);
+  assert.equal(P.beginNextEdition(JSON.parse(JSON.stringify(award.progression))).eligibility.copaBrasil, true, `${type}: winner's qualification survives save and edition rollover`);
+}
+console.log('Career integration D→C→B→A, Série D state vacancies, Copa Paulista and Copa Rio awards, rollover and JSON persistence passed.');
