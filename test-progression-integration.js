@@ -137,7 +137,7 @@ for (const [type, stateName] of [['copaPaulista', 'Copa Paulista'], ['copaRio', 
   let stateCup = Cups.create({ type, club, teams: [club, 'Rival A', 'Rival B', 'Rival C'], season: 2027, stateName });
   while (!stateCup.completed) {
     const match = Cups.getNextMatch(stateCup, club);
-    stateCup = Cups.playMatch(stateCup, club, match.home === club ? 5 : 0, match.away === club ? 0 : 5);
+    stateCup = Cups.playMatch(stateCup, club, match.home === club ? 5 : 0, match.away === club ? 5 : 0);
   }
   assert.equal(stateCup.champion, club, `${type}: user wins cup`);
   stateCup = Cups.chooseStateCup(stateCup, club, 'copaBrasil');
