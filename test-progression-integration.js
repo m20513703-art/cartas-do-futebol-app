@@ -154,4 +154,27 @@ for (const [type, stateName] of [['copaPaulista', 'Copa Paulista'], ['copaRio', 
   assert.equal(award.progression.pendingEligibility.copaBrasil, true);
   assert.equal(P.beginNextEdition(JSON.parse(JSON.stringify(award.progression))).eligibility.copaBrasil, true, `${type}: winner's qualification survives save and edition rollover`);
 }
+
+// Coordinated rollover requires both deliberately separate season tracks and every eligible competition/cup.
+const rollCheck = extra => P.rolloverReadiness({
+  seasonComplete: true, tournamentSeasonComplete: true,
+  tournaments: { serieD: { eligible: true, done: true }, estadual: { eligible: true, done: true }, copaBrasil: { eligible: false } },
+  legacyCups: [{ complete: true, champion: 'Rival', choice: null }], club, country: 'Brasil',
+  isTournamentFinished: item => item.done, ...extra,
+});
+assert.equal(rollCheck({}).ready, true);
+assert(rollCheck({ seasonComplete: false }).blockers.includes('legacy-season'));
+assert(rollCheck({ tournamentSeasonComplete: false }).blockers.includes('national-season'));
+assert(rollCheck({ tournaments: { estadual: { eligible: true, done: false } } }).blockers.includes('competition:estadual'));
+assert(rollCheck({ legacyCups: [{ complete: false }] }).blockers.includes('legacy-cup:1'));
+assert(rollCheck({ legacyCups: [{ complete: true, champion: club, choice: null }] }).blockers.includes('legacy-cup-choice:1'));
+const oldCareer = { season: 4, tournamentSeason: 5, seasonComplete: true, stateSeasonComplete: true, tournamentSeasonComplete: true, tournamentResults: { C: { champion: club } }, tournamentArchive: [{ season: 4 }], stateLeagueQualification: { qualified: true } };
+const rolled = P.applyCoordinatedRollover(oldCareer, { division: 'Série C', tournamentTier: 'C', league: { teams: [] } });
+assert.equal(rolled.season, 6); assert.equal(rolled.tournamentSeason, 6);
+assert.deepEqual(rolled.tournamentArchive.at(-1), { season: 5, results: oldCareer.tournamentResults });
+assert.deepEqual(rolled.tournamentResults, {});
+assert.equal(rolled.seasonComplete, false); assert.equal(rolled.stateSeasonComplete, false); assert.equal(rolled.tournamentSeasonComplete, false);
+assert.deepEqual(rolled.stateLeagueQualification, oldCareer.stateLeagueQualification, 'state-league qualification feed survives coordinated rollover');
+assert.equal(oldCareer.season, 4, 'rollover does not mutate the prior state');
+
 console.log('Career integration D→C→B→A, Série D state vacancies, Copa Paulista and Copa Rio awards, rollover and JSON persistence passed.');

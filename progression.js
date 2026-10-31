@@ -67,6 +67,31 @@ function awardStateCup(prog, club, champion, runnerUp, championChoice = null) {
 function unfinishedCompetitions(tournaments, isFinished) {
   return Object.entries(tournaments || {}).filter(([key, item]) => item?.eligible && !isFinished(item, key)).map(([key]) => key);
 }
+function rolloverReadiness({ seasonComplete, tournamentSeasonComplete, tournaments, legacyCups, club, country, isTournamentFinished }) {
+  const blockers = [];
+  if (seasonComplete !== true) blockers.push('legacy-season');
+  if (tournamentSeasonComplete !== true) blockers.push('national-season');
+  blockers.push(...unfinishedCompetitions(tournaments, isTournamentFinished || (() => false)).map(key => `competition:${key}`));
+  for (const [index, cup] of (legacyCups || []).entries()) {
+    if (!cup || cup.complete !== true) blockers.push(`legacy-cup:${index + 1}`);
+    else if (country === 'Brasil' && cup.champion === club && !cup.choice) blockers.push(`legacy-cup-choice:${index + 1}`);
+  }
+  return { ready: blockers.length === 0, blockers };
+}
+function applyCoordinatedRollover(state, updates = {}) {
+  if (!state || typeof state !== 'object') return state;
+  const nextSeason = Math.max(Number(state.season) || 1, Number(state.tournamentSeason) || 1) + 1;
+  const archive = [...(state.tournamentArchive || [])];
+  if (state.tournamentResults && Object.keys(state.tournamentResults).length) {
+    archive.push({ season: state.tournamentSeason || state.season || 1, results: state.tournamentResults });
+  }
+  return {
+    ...state, ...updates,
+    season: nextSeason, tournamentSeason: nextSeason,
+    tournamentArchive: archive, tournamentResults: {},
+    seasonComplete: false, stateSeasonComplete: false, tournamentSeasonComplete: false,
+  };
+}
 function beginNextEdition(prog) {
   const tier = prog.pendingTier || prog.tier || 'D';
   const pending = prog.pendingEligibility || {};
@@ -76,4 +101,4 @@ function beginNextEdition(prog) {
   next.pendingEligibility = {};
   return next;
 }
-module.exports = { makeProgression, completeLeague, recordStateLeagueQualification, awardStateCup, beginNextEdition, unfinishedCompetitions };
+module.exports = { makeProgression, completeLeague, recordStateLeagueQualification, awardStateCup, beginNextEdition, unfinishedCompetitions, rolloverReadiness, applyCoordinatedRollover };
