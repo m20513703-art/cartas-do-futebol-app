@@ -83,6 +83,12 @@ let stateRepeat = P.recordStateLeagueQualification(P.makeProgression('D'), club,
 stateRepeat = P.recordStateLeagueQualification(stateRepeat, club, 3, 2027).progression;
 assert(!stateRepeat.rosters.serieD?.includes(club), 'out-of-top-two next season revokes a prior state-league place');
 assert(!P.beginNextEdition(JSON.parse(JSON.stringify(stateRepeat))).rosters.serieD?.includes(club));
+// A user champion first finishes the final, then chooses a place in the UI.
+const pendingChoice = P.awardStateCup(P.makeProgression('D'), club, club, 'Runner FC', null);
+assert.equal(pendingChoice.championChoice, null);
+assert.equal(pendingChoice.runnerUpGets, null);
+assert.equal(pendingChoice.progression.pendingEligibility.copaBrasil, undefined);
+assert.equal(pendingChoice.progression.pendingEligibility.serieD, undefined);
 // State cup winner's choice is recorded for the next edition, not enabled in-season.
 let cup = P.awardStateCup(p, club, club, 'Runner FC', 'copaBrasil');
 assert.equal(cup.progression.eligibility.copaBrasil, false, 'new state-cup qualification must stay pending until next edition')

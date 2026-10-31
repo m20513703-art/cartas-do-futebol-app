@@ -49,6 +49,10 @@ function awardStateCup(prog, club, champion, runnerUp, championChoice = null) {
   const next = { ...prog, rosters: { ...(prog.rosters || {}) }, eligibility: { ...(prog.eligibility || {}) }, pendingEligibility: { ...(prog.pendingEligibility || {}) } };
   let choice = championChoice;
   if (champion !== club && !choice) choice = 'serieD';
+  // The player's victory is recorded first; their choice is made later in the UI.
+  if (champion === club && choice == null) {
+    return { progression: next, championChoice: null, championGets: null, runnerUpGets: null };
+  }
   if (!['serieD', 'copaBrasil'].includes(choice)) throw new TypeError('A escolha do campeão deve ser serieD ou copaBrasil.');
   const championAward = choice;
   const runnerUpAward = choice === 'serieD' ? 'copaBrasil' : 'serieD';
