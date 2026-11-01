@@ -134,10 +134,28 @@ console.log('Transições efetivas de promoção/rebaixamento: C→B, B→A, B�
 const dup = engine.create({ division: 'Série B', club: ' Clube Único ', teams: ['Clube Único', 'Clube Único', 'Outro Clube'] });
 assert.equal(dup.teams.length, 20);
 assert.equal(new Set(dup.teams.map(t => t.name.toLowerCase())).size, 20);
-assert(dup.teams.filter(t => t.fictional).length >= 17);
+assert(dup.teams.filter(t => t.fictional).length === 0);
+assert(!dup.teams.some(t => /fictício/i.test(t.name)));
+for (const code of ['A','B','C']) { const s=engine.create({division:code,club:'Meu Clube '+code,teams:[],season:2026}); assert.equal(s.teams.length,20); assert.equal(new Set(s.teams.map(t=>t.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,''))).size,20); assert(!s.teams.some(t=>/clube fictício/i.test(t.name))); }
 // A Série C não deve expor destinos de promoção/rebaixamento antes da decisão.
 let early = engine.create({ division: 'C', club: 'Preliminar', teams: mkTeams('Preliminar') });
 const earlySummary = engine.summarize(early);
 assert(!('promotedTeams' in earlySummary));
 assert(!('relegatedTeams' in earlySummary));
 console.log('Validações adicionais: duplicatas, clubes fictícios e sigilo de qualificações OK');
+
+// Clube fora dos oito: concluir automaticamente mata-mata sem travar temporada.
+for (const scenario of ['lose']) {
+  let s = engine.create({division:'C', club:'Teste Não Classificado', teams:[], season:'Sem playoff'});
+  while (s.stage === 'league') {
+    const m = engine.getNextMatch(s, s.clubId);
+    s = engine.playMatch(s, s.clubId, m.home === s.clubId ? 0 : 8, m.away === s.clubId ? 0 : 8);
+  }
+  assert.equal(s.stage, 'complete', 'Série C sem o jogador no top 8 deve completar playoff simulado');
+  const outcome = engine.summarize(s, s.clubId);
+  assert.equal(outcome.clubOutcome.nextDivision, 'D');
+  assert.equal(outcome.promotedTeams.length, 4);
+  assert.equal(engine.getNextMatch(s, s.clubId), null);
+  assert.deepEqual(JSON.parse(JSON.stringify(s)), s);
+}
+console.log('Série C sem classificação: playoffs simulados, rebaixamento e salvamento OK');
