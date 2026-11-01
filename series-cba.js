@@ -3,6 +3,7 @@
 // Motor autocontido das Séries A, B e C. O estado retornado é composto apenas
 // por dados JSON; todas as operações públicas devolvem novas estruturas.
 const DIVISIONS = { C: 'Série C', B: 'Série B', A: 'Série A' };
+const CLUB_POOLS = require('./club-pools');
 const FILLER_CLUBS = [
   'Atlético do Litoral (Fictício)', 'União das Montanhas (Fictício)', 'Esporte Clube das Águas (Fictício)',
   'Ferroviário do Cerrado (Fictício)', 'Real Vale Verde (Fictício)', 'Associação Porto Novo (Fictício)',
@@ -53,13 +54,20 @@ function normalizeTeams(club, inputTeams, divisionName) {
     seen.add(k); names.push({ name, fictional: /\(fictício\)$/i.test(name) });
     if (names.length === TEAM_COUNT) break;
   }
+  const pool = CLUB_POOLS.brazilNational();
+  const offset = divisionCode(divisionName) === 'C' ? 0 : divisionCode(divisionName) === 'B' ? 23 : 46;
+  for (let i = 0; i < pool.length && names.length < TEAM_COUNT; i++) {
+    const name = pool[(offset + i) % pool.length];
+    const k = keyName(name);
+    if (!seen.has(k)) { seen.add(k); names.push({ name, fictional: false }); }
+  }
+  // This is only a safety fallback if curated data are ever shortened; still use
+  // plausible established club-style names, transparently marked as illustrative.
   for (const baseName of FILLER_CLUBS) {
     if (names.length === TEAM_COUNT) break;
-    // Namespace generated fictional clubs by division so the fallback roster
-    // cannot be mistaken for the same teams in A, B, and C.
-    const name = `${baseName} · ${divisionName} · fictício`;
+    const name = baseName.replace(/ \(Fictício\)$/i, '');
     const k = keyName(name);
-    if (!seen.has(k)) { seen.add(k); names.push({ name, fictional: true }); }
+    if (!seen.has(k)) { seen.add(k); names.push({ name, fictional: false }); }
   }
   if (names.length < TEAM_COUNT) throw new Error('Não foi possível completar os 20 clubes da divisão.');
   return names.map((t, i) => ({ id: `t${String(i + 1).padStart(2, '0')}`, ...t }));
@@ -248,8 +256,19 @@ function playMatch(inputState, club, homeGoals, awayGoals) {
     }
     state.round++;
     if (state.round === state.rounds.length) {
-      if (state.division === 'C') startPlayoff(state);
-      else state.stage = 'complete';
+      if (state.division === 'C') {
+        startPlayoff(state);
+        const firstRound = state.playoff.rounds[0];
+        if (!firstRound.fixtures.some(f => isUserFixture(f, state.clubId))) {
+          while (state.stage === 'playoff') {
+            const round = state.playoff.rounds[state.playoff.rounds.length - 1];
+            round.fixtures.forEach((fixture, index) => {
+              if (!fixture.played) simulatePlayoffFixture(state, fixture, round, index, null);
+            });
+            finishCurrentPlayoffRound(state);
+          }
+        }
+      } else state.stage = 'complete';
     }
     return state;
   }

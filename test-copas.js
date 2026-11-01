@@ -59,7 +59,8 @@ assert.equal(eliminated.completed, true);
 assert.equal(cups.summarize(eliminated, 'Perdedor FC').eliminated, true);
 assert.equal(eliminated.rounds.length, 4);
 assert.ok(eliminated.rounds.flatMap(r => r.matches).every(m => m.status === 'played'));
-assert.ok(eliminated.teams.some(t => t.fictional), 'auto-added clubs are marked fictitious');
+assert.ok(eliminated.teams.some(t => !t.fictional && t.name !== 'Perdedor FC'), 'automatically selected real club names are retained');
+assert.ok(!eliminated.teams.some(t => /clube fictício/i.test(t.name)), 'no generic fictitious opponents');
 
 // State tournament has 4 clubs and supports a fresh, independent season.
 let estadual = cups.create({ type: 'estadual', club: 'MM FC', teams: ['MM FC', 'Rival A', 'Rival B', 'Rival C'], season: 2026, stateName: 'São Paulo' });
@@ -85,7 +86,9 @@ assert.equal(novoAno.qualification, null);
 for (const type of ['copaBrasil', 'libertadores', 'sulAmericana']) {
   const s = cups.create({ type, club: 'MM FC', teams: ['MM FC'], season: 2026 });
   assert.equal(s.teams.length, 16);
-  assert.ok(s.teams.filter(t => t.fictional).length >= 15);
+  assert.equal(s.teams.filter(t => t.fictional).length, 0);
+  assert.equal(new Set(s.teams.map(t => t.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,''))).size, 16);
+  assert(!s.teams.some(t => /clube fictício/i.test(t.name)));
 }
 assert.throws(() => cups.create({ type: 'estadual', club: 'MM FC', teams: [], season: 2026 }), /stateName/);
 assert.throws(() => cups.create({ type: 'liga', club: 'MM FC', teams: [], season: 2026 }), /type/);

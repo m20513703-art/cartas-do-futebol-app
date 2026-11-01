@@ -10,7 +10,8 @@ assert.equal(state.groups.length, 8);
 assert.deepEqual(state.groups.map(g => g.teamIds.length), Array(8).fill(15));
 assert.equal(state.fixtures.length, 840);
 assert.equal(state.byes.length, 120);
-assert.ok(state.clubs.some(c => c.name === 'Clube Fictício 001' && c.fictional), 'generated clubs are labeled fictional');
+assert.ok(state.clubs.some(c => c.name === 'Palmeiras' || c.name === 'Flamengo'), 'real club pool fills generated opponents');
+assert.ok(!state.clubs.some(c => /clube fictício/i.test(c.name)), 'no generic fictitious opponents');
 assert.equal(state.clubs.find(c => c.name === 'Clube Cadastrado 01').fictional, false);
 
 // Verify every group is a single round robin: 15 rounds, 7 matches/round, each pair once.

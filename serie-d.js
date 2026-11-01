@@ -4,6 +4,7 @@
 const VERSION = 1;
 const GROUPS = 'ABCDEFGH'.split('');
 const TEAM_COUNT = 120;
+const CLUB_POOLS = require('./club-pools');
 
 function assert(condition, message) { if (!condition) throw new TypeError(message); }
 function clone(value) { return JSON.parse(JSON.stringify(value)); }
@@ -26,12 +27,17 @@ function normalizeTeams(club, teams) {
     if (!seen.has(key)) { names.push(name); seen.add(key); }
     if (names.length === TEAM_COUNT) break;
   }
-  let fictitious = 1;
+  const candidates = CLUB_POOLS.brazilNational();
+  for (const name of candidates) {
+    if (names.length >= TEAM_COUNT) break;
+    const key = name.toLocaleLowerCase('pt-BR');
+    if (!seen.has(key)) { names.push(name); seen.add(key); }
+  }
+  let safety = 1;
   while (names.length < TEAM_COUNT) {
-    let name;
-    do { name = `Clube Fictício ${String(fictitious++).padStart(3, '0')}`; }
-    while (seen.has(name.toLocaleLowerCase('pt-BR')));
-    names.push(name); seen.add(name.toLocaleLowerCase('pt-BR'));
+    const name = `Associação Atlética ${String(safety++).padStart(3, '0')}`;
+    const key = name.toLocaleLowerCase('pt-BR');
+    if (!seen.has(key)) { names.push(name); seen.add(key); }
   }
   return names.map((name, index) => ({ id: `club-${String(index + 1).padStart(3, '0')}`, name,
     fictional: index > 0 && !teams.some(t => (typeof t === 'string' ? t : t && t.name) === name) }));

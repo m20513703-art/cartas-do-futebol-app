@@ -1,5 +1,6 @@
 'use strict';
 
+const CLUB_POOLS = require('./club-pools');
 const FORMATS = Object.freeze({ estadual: 4, copaPaulista: 4, copaRio: 4, copaBrasil: 16, libertadores: 16, sulAmericana: 16 });
 const STATE_CUP_TYPES = Object.freeze(['estadual', 'copaPaulista', 'copaRio']);
 const TYPES = Object.keys(FORMATS);
@@ -104,20 +105,29 @@ function create({ type, club, teams = [], season, stateName } = {}) {
   let names = teams.map(teamName);
   if (names.some(n => !n)) throw new TypeError('Nome de clube vazio em teams.');
   if (!names.includes(club)) names.unshift(club);
-  if (new Set(names).size !== names.length) throw new TypeError('teams não pode conter clubes duplicados.');
+  const keys = names.map(n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, ''));
+  if (new Set(keys).size !== keys.length) throw new TypeError('teams não pode conter clubes duplicados.');
   const size = FORMATS[type];
   if (names.length > size) throw new RangeError(`${type} aceita ${size} clubes neste formato simplificado.`);
-  const fictionalTeams = [];
-  for (let i = 1; names.length < size; i++) {
-    let name = `Clube fictício ${String(i).padStart(2, '0')}`;
-    while (names.includes(name)) i++;
-    names.push(name); fictionalTeams.push(name);
+  const candidatePool = CLUB_POOLS.brazilNational();
+  const seen = new Set(names.map(n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '')));
+  for (const name of candidatePool) {
+    if (names.length >= size) break;
+    const key = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!seen.has(key)) { names.push(name); seen.add(key); }
+  }
+  // Fall back only if future edits remove too much curated data.
+  let safety = 1;
+  while (names.length < size) {
+    const name = `Associação Atlética ${String(safety++).padStart(3, '0')}`;
+    const key = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!seen.has(key)) { names.push(name); seen.add(key); }
   }
   const state = {
     schema: 'futebol-top-cup-v1', type, club, season: String(season), stateName: type === 'estadual' ? stateName.trim() : null,
     format: { kind: 'mata-mata simples', teams: size, notice: 'Formato demonstrativo simplificado; participantes simulados não são dados oficiais.' },
-    dataNotice: 'Participantes fornecidos são entradas do chamador; clubes adicionados automaticamente são fictícios. Resultados simulados não são oficiais.',
-    teams: names.map(name => ({ name, fictional: fictionalTeams.includes(name) })), rounds: [], completed: false,
+    dataNotice: 'Nomes de clubes podem ser reais, mas participantes e resultados são demonstrativos e não constituem listas oficiais atuais.',
+    teams: names.map(name => ({ name, fictional: false })), rounds: [], completed: false,
     champion: null, runnerUp: null, qualification: null
   };
   addRound(state, names);
