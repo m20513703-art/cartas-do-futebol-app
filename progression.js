@@ -72,11 +72,16 @@ function rolloverReadiness({ seasonComplete, tournamentSeasonComplete, tournamen
   if (seasonComplete !== true) blockers.push('legacy-season');
   if (tournamentSeasonComplete !== true) blockers.push('national-season');
   blockers.push(...unfinishedCompetitions(tournaments, isTournamentFinished || (() => false)).map(key => `competition:${key}`));
-  for (const [index, cup] of (legacyCups || []).entries()) {
-    if (!cup || cup.complete !== true) blockers.push(`legacy-cup:${index + 1}`);
-    else if (country === 'Brasil' && cup.champion === club && !cup.choice) blockers.push(`legacy-cup-choice:${index + 1}`);
-  }
+  // The legacy career cup UI is intentionally hidden in the coordinated-season flow.
+  // It must never block rollover; national/state-cup qualifications are tracked in tournaments.
   return { ready: blockers.length === 0, blockers };
+}
+function legacyNextDivision(state) {
+  if (!state || typeof state !== 'object') return null;
+  // Prefer the durable league-season outcome; old saves may use lastResult only if it
+  // still explicitly marks the result as a season end. Never infer lost promotion data.
+  const seasonResult = state.legacySeasonResult || (state.seasonComplete === true && state.lastResult?.seasonEnd === true ? state.lastResult : null);
+  return seasonResult?.nextDivision || state.division || null;
 }
 function applyCoordinatedRollover(state, updates = {}) {
   if (!state || typeof state !== 'object') return state;
@@ -89,7 +94,7 @@ function applyCoordinatedRollover(state, updates = {}) {
     ...state, ...updates,
     season: nextSeason, tournamentSeason: nextSeason,
     tournamentArchive: archive, tournamentResults: {},
-    seasonComplete: false, stateSeasonComplete: false, tournamentSeasonComplete: false,
+    seasonComplete: false, stateSeasonComplete: false, tournamentSeasonComplete: false, legacySeasonResult: null,
   };
 }
 function beginNextEdition(prog) {
@@ -101,4 +106,4 @@ function beginNextEdition(prog) {
   next.pendingEligibility = {};
   return next;
 }
-module.exports = { makeProgression, completeLeague, recordStateLeagueQualification, awardStateCup, beginNextEdition, unfinishedCompetitions, rolloverReadiness, applyCoordinatedRollover };
+module.exports = { makeProgression, completeLeague, recordStateLeagueQualification, awardStateCup, beginNextEdition, unfinishedCompetitions, rolloverReadiness, legacyNextDivision, applyCoordinatedRollover };

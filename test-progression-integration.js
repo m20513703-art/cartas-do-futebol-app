@@ -155,25 +155,30 @@ for (const [type, stateName] of [['copaPaulista', 'Copa Paulista'], ['copaRio', 
   assert.equal(P.beginNextEdition(JSON.parse(JSON.stringify(award.progression))).eligibility.copaBrasil, true, `${type}: winner's qualification survives save and edition rollover`);
 }
 
-// Coordinated rollover requires both deliberately separate season tracks and every eligible competition/cup.
+// Coordinated rollover requires the separate season tracks and eligible national competitions; hidden legacy cups do not block it.
 const rollCheck = extra => P.rolloverReadiness({
   seasonComplete: true, tournamentSeasonComplete: true,
   tournaments: { serieD: { eligible: true, done: true }, estadual: { eligible: true, done: true }, copaBrasil: { eligible: false } },
-  legacyCups: [{ complete: true, champion: 'Rival', choice: null }], club, country: 'Brasil',
+  legacyCups: [{ complete: false, champion: club, choice: null }], club, country: 'Brasil',
   isTournamentFinished: item => item.done, ...extra,
 });
 assert.equal(rollCheck({}).ready, true);
 assert(rollCheck({ seasonComplete: false }).blockers.includes('legacy-season'));
 assert(rollCheck({ tournamentSeasonComplete: false }).blockers.includes('national-season'));
 assert(rollCheck({ tournaments: { estadual: { eligible: true, done: false } } }).blockers.includes('competition:estadual'));
-assert(rollCheck({ legacyCups: [{ complete: false }] }).blockers.includes('legacy-cup:1'));
-assert(rollCheck({ legacyCups: [{ complete: true, champion: club, choice: null }] }).blockers.includes('legacy-cup-choice:1'));
-const oldCareer = { season: 4, tournamentSeason: 5, seasonComplete: true, stateSeasonComplete: true, tournamentSeasonComplete: true, tournamentResults: { C: { champion: club } }, tournamentArchive: [{ season: 4 }], stateLeagueQualification: { qualified: true } };
-const rolled = P.applyCoordinatedRollover(oldCareer, { division: 'Série C', tournamentTier: 'C', league: { teams: [] } });
+assert.equal(rollCheck({ legacyCups: [{ complete: false }] }).ready, true, 'hidden legacy cup cannot block coordinated rollover');
+assert.equal(rollCheck({ legacyCups: [{ complete: true, champion: club, choice: null }] }).ready, true, 'hidden legacy-cup choice cannot block coordinated rollover');
+const oldCareer = { season: 4, tournamentSeason: 5, seasonComplete: true, stateSeasonComplete: true, tournamentSeasonComplete: true, tournamentResults: { C: { champion: club } }, tournamentArchive: [{ season: 4 }], stateLeagueQualification: { qualified: true }, division: 'Série C', legacySeasonResult: { seasonEnd: true, nextDivision: 'Série B' }, lastResult: { competition: 'Série D', seasonEnd: false } };
+assert.equal(P.legacyNextDivision(oldCareer), 'Série B', 'national match result cannot overwrite legacy league promotion');
+const savedSeasonResult = JSON.parse(JSON.stringify(oldCareer));
+assert.equal(P.legacyNextDivision(savedSeasonResult), 'Série B', 'legacy promotion outcome survives JSON save/load');
+assert.equal(P.legacyNextDivision({ seasonComplete: true, division: 'Série C', lastResult: { seasonEnd: true, nextDivision: 'Série D' } }), 'Série D', 'older saves can use lastResult when it still records seasonEnd');
+assert.equal(P.legacyNextDivision({ seasonComplete: true, division: 'Série C', lastResult: { seasonEnd: false, nextDivision: 'Série A' } }), 'Série C', 'do not invent recovery if a legacy season result was overwritten');
+const rolled = P.applyCoordinatedRollover(oldCareer, { division: P.legacyNextDivision(oldCareer), tournamentTier: 'C', league: { teams: [] } });
 assert.equal(rolled.season, 6); assert.equal(rolled.tournamentSeason, 6);
 assert.deepEqual(rolled.tournamentArchive.at(-1), { season: 5, results: oldCareer.tournamentResults });
 assert.deepEqual(rolled.tournamentResults, {});
-assert.equal(rolled.seasonComplete, false); assert.equal(rolled.stateSeasonComplete, false); assert.equal(rolled.tournamentSeasonComplete, false);
+assert.equal(rolled.seasonComplete, false); assert.equal(rolled.stateSeasonComplete, false); assert.equal(rolled.tournamentSeasonComplete, false); assert.equal(rolled.legacySeasonResult, null);
 assert.deepEqual(rolled.stateLeagueQualification, oldCareer.stateLeagueQualification, 'state-league qualification feed survives coordinated rollover');
 assert.equal(oldCareer.season, 4, 'rollover does not mutate the prior state');
 
