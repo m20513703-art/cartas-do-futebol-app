@@ -8,7 +8,7 @@ for (const [uf, names] of Object.entries(pools.STATE_CLUBS)) {
   assert(!names.some(x => /clube fictício|clube ficticio/i.test(x)), `${uf} has generic placeholder`);
 }
 assert(pools.brazilNational().length >= 120, 'Brazilian pools must contain enough unique names for Série D');
-assert.equal(Object.keys(pools.INTERNATIONAL).length, 20);
+assert.equal(Object.keys(pools.INTERNATIONAL).length, 19); // Brazil is the 20th supported country and is covered by state pools.
 for (const [country, names] of Object.entries(pools.INTERNATIONAL)) {
   assert(names.length >= 8, `${country} needs enough club names`);
   const norm = names.map(x => x.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,''));
