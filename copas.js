@@ -1,6 +1,7 @@
 'use strict';
 
 const CLUB_POOLS = require('./club-pools');
+const PROVIDED_COPA_ENTRANTS = require('./brazil-2026-copa-brasil-entrants.json');
 const FORMATS = Object.freeze({ estadual: 4, copaPaulista: 4, copaRio: 4, copaBrasil: 16, libertadores: 16, sulAmericana: 16 });
 const STATE_CUP_TYPES = Object.freeze(['estadual', 'copaPaulista', 'copaRio']);
 const TYPES = Object.keys(FORMATS);

@@ -19,3 +19,11 @@ O arquivo `club-pools.js` fornece nomes de clubes conhecidos por país e por est
 
 ## Pools de clubes
 `club-pools.js` fornece nomes de clubes conhecidos por país e por estado brasileiro. Cada campeonato seleciona adversários determinísticos, evitando duplicatas dentro da competição. Nomes reais são usados apenas como identificação para o jogo: isso não afirma participação atual confirmada, afiliação oficial, nem dados competitivos de 2026. Formatos e resultados seguem as regras simplificadas do jogo.
+
+
+## Edição isolada Brasil 2026
+
+Esta edição começa pela escolha de estado, competição/divisão e clube no Brasil. Ela usa um identificador de armazenamento e um identificador Android novos: salvamentos da edição publicada não são lidos nem apagados. Dados estaduais fornecidos estão em `brazil-2026-state-clubs.json`; Série A/B/C, grupos listados da Série D, entradas da Copa do Brasil e formatos/regulamentos conhecidos ficam nos arquivos `brazil-2026-*.json`. Listas e regras ausentes são explicitamente assinaladas como não fornecidas; não completar participantes por suposição. A Série D ainda mantém um motor legado de temporada incompatível com a distribuição 16×6 — ver o registro `engineStatus` em `brazil-2026-formats.json`; portanto não alegamos equivalência regulatória total. O workflow desta branch cria apenas artifact de validação, não publica nem libera aplicativo.
+
+
+**Conferência da Copa do Brasil:** as equipes nomeadas na lista enviada somam 101 nomes após incluir o Vitória-BA que também estava na relação. O total anunciado é 126; os 25 participantes restantes não foram enviados, portanto não foram inventados.

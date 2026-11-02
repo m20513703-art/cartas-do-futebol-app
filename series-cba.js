@@ -4,18 +4,7 @@
 // por dados JSON; todas as operações públicas devolvem novas estruturas.
 const DIVISIONS = { C: 'Série C', B: 'Série B', A: 'Série A' };
 const CLUB_POOLS = require('./club-pools');
-const FILLER_CLUBS = [
-  'Atlético do Litoral (Fictício)', 'União das Montanhas (Fictício)', 'Esporte Clube das Águas (Fictício)',
-  'Ferroviário do Cerrado (Fictício)', 'Real Vale Verde (Fictício)', 'Associação Porto Novo (Fictício)',
-  'Nacional da Serra (Fictício)', 'Grêmio das Palmeiras (Fictício)', 'Operário do Sol (Fictício)',
-  'Estrela do Norte (Fictício)', 'Clube Aurora (Fictício)', 'Desportivo Pioneiro (Fictício)',
-  'Esportivo Santa Aurora (Fictício)', 'União Central (Fictício)', 'Independente do Oeste (Fictício)',
-  'Atlético Planalto (Fictício)', 'Associação Nova Esperança (Fictício)', 'Esporte Clube Horizonte (Fictício)',
-  'Juventude do Sul (Fictício)', 'Real Campo Azul (Fictício)', 'Futebol Clube Primavera (Fictício)',
-  'Portuguesa do Interior (Fictício)', 'Racing de Vila Nova (Fictício)', 'São Bento do Mar (Fictício)',
-  'Esporte Clube Riacho (Fictício)', 'União do Pampa (Fictício)', 'Acadêmicos do Brasil (Fictício)',
-  'Clube Atlético das Flores (Fictício)', 'Esportivo Três Rios (Fictício)', 'Nacional de Pedra (Fictício)'
-];
+const NATIONAL = require('./brazil-2026-national-clubs.json');
 const TEAM_COUNT = 20;
 
 function cleanName(value) {
@@ -54,7 +43,7 @@ function normalizeTeams(club, inputTeams, divisionName) {
     seen.add(k); names.push({ name, fictional: /\(fictício\)$/i.test(name) });
     if (names.length === TEAM_COUNT) break;
   }
-  const pool = CLUB_POOLS.brazilNational();
+  const pool = NATIONAL[DIVISIONS[divisionCode(divisionName)]] || [];
   const offset = divisionCode(divisionName) === 'C' ? 0 : divisionCode(divisionName) === 'B' ? 23 : 46;
   for (let i = 0; i < pool.length && names.length < TEAM_COUNT; i++) {
     const name = pool[(offset + i) % pool.length];
@@ -63,13 +52,7 @@ function normalizeTeams(club, inputTeams, divisionName) {
   }
   // This is only a safety fallback if curated data are ever shortened; still use
   // plausible established club-style names, transparently marked as illustrative.
-  for (const baseName of FILLER_CLUBS) {
-    if (names.length === TEAM_COUNT) break;
-    const name = baseName.replace(/ \(Fictício\)$/i, '');
-    const k = keyName(name);
-    if (!seen.has(k)) { seen.add(k); names.push({ name, fictional: false }); }
-  }
-  if (names.length < TEAM_COUNT) throw new Error('Não foi possível completar os 20 clubes da divisão.');
+  if (names.length < TEAM_COUNT) throw new Error('Lista de participantes incompleta; nenhum clube será inventado.');
   return names.map((t, i) => ({ id: `t${String(i + 1).padStart(2, '0')}`, ...t }));
 }
 

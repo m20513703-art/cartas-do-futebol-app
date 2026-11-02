@@ -4,6 +4,7 @@
 const VERSION = 1;
 const GROUPS = 'ABCDEFGH'.split('');
 const TEAM_COUNT = 120;
+const EXPLICIT_GROUPS = require('./brazil-2026-series-d-groups.json');
 const CLUB_POOLS = require('./club-pools');
 
 function assert(condition, message) { if (!condition) throw new TypeError(message); }
@@ -33,12 +34,12 @@ function normalizeTeams(club, teams) {
     const key = name.toLocaleLowerCase('pt-BR');
     if (!seen.has(key)) { names.push(name); seen.add(key); }
   }
-  let safety = 1;
-  while (names.length < TEAM_COUNT) {
-    const name = `Associação Atlética ${String(safety++).padStart(3, '0')}`;
-    const key = name.toLocaleLowerCase('pt-BR');
-    if (!seen.has(key)) { names.push(name); seen.add(key); }
+  if (names.length < TEAM_COUNT) {
+    const provided = Object.values(EXPLICIT_GROUPS).flat();
+    for (const name of provided) { if (names.length >= TEAM_COUNT) break; const key=name.toLocaleLowerCase('pt-BR'); if(!seen.has(key)){names.push(name);seen.add(key);} }
   }
+  // Any remaining slots are shown as unavailable rather than inventing fictional participants.
+  while (names.length < TEAM_COUNT) { const name=`Participante não fornecido ${names.length+1}`; names.push(name); }
   return names.map((name, index) => ({ id: `club-${String(index + 1).padStart(3, '0')}`, name,
     fictional: index > 0 && !teams.some(t => (typeof t === 'string' ? t : t && t.name) === name) }));
 }

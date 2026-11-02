@@ -1,0 +1,733 @@
+{
+  "AC": {
+    "1ª Divisão": [
+      "ADESG",
+      "Galvez",
+      "Humaitá",
+      "Independência",
+      "Rio Branco",
+      "Santa Cruz",
+      "São Francisco",
+      "Vasco"
+    ]
+  },
+  "AL": {
+    "1ª Divisão": [
+      "ASA",
+      "Coruripe",
+      "CSA",
+      "CRB",
+      "CSE",
+      "Cruzeiro de Arapiraca",
+      "Murici",
+      "Penedense"
+    ],
+    "2ª Divisão": [
+      "São Domingos",
+      "Desportivo Aliança",
+      "Jaciobá",
+      "Miguelense",
+      "Sete de Setembro",
+      "Zumbi"
+    ]
+  },
+  "AP": {
+    "1ª Divisão": [
+      "Cristal",
+      "Independente",
+      "Macapá",
+      "Oratório",
+      "Santos",
+      "São José",
+      "Trem",
+      "Ypiranga"
+    ]
+  },
+  "AM": {
+    "1ª Divisão": [
+      "Amazonas",
+      "Itacoatiara",
+      "Manauara",
+      "Manaus",
+      "Nacional",
+      "Parintins",
+      "Princesa do Solimões"
+    ]
+  },
+  "BA": {
+    "1ª Divisão": [
+      "Atlético de Alagoinhas",
+      "Bahia",
+      "Bahia de Feira",
+      "Barcelona de Ilhéus",
+      "Galícia",
+      "Jacuipense",
+      "Jequié",
+      "Juazeirense",
+      "Porto",
+      "Vitória"
+    ],
+    "2ª Divisão": [
+      "Leônico",
+      "Barreiras",
+      "Camaçari",
+      "Vitória da Conquista",
+      "Feira FC",
+      "Fluminense de Feira",
+      "Grapiúna",
+      "Jacobina",
+      "Redenção",
+      "SSA FC"
+    ]
+  },
+  "CE": {
+    "1ª Divisão": [
+      "Ceará",
+      "Ferroviário",
+      "Floresta",
+      "Fortaleza",
+      "Horizonte",
+      "Iguatu",
+      "Maracanã",
+      "Maranguape",
+      "Quixadá",
+      "Tirol"
+    ]
+  },
+  "DF": {
+    "1ª Divisão": [
+      "Brasiliense",
+      "Brasília",
+      "Capital",
+      "Ceilândia",
+      "Gama",
+      "Paranoá",
+      "Real Brasília",
+      "Samambaia",
+      "Sobradinho",
+      "ARUC"
+    ]
+  },
+  "ES": {
+    "1ª Divisão": [
+      "Desportiva Ferroviária",
+      "Forte",
+      "Porto Vitória",
+      "Real Noroeste",
+      "Rio Branco-ES",
+      "Serra",
+      "Vitória-ES"
+    ],
+    "2ª Divisão": [
+      "Audax São Mateus",
+      "CTE Colatina",
+      "Doze",
+      "GEL",
+      "Linhares",
+      "Rive",
+      "Estrela do Norte",
+      "Tupy",
+      "Pinheiros",
+      "Sport Brasil Capixaba"
+    ]
+  },
+  "GO": {
+    "1ª Divisão": [
+      "Abecat Ouvidorense",
+      "Anapolina",
+      "Anápolis",
+      "Aparecidense",
+      "Atlético-GO",
+      "Centro Oeste",
+      "CRAC",
+      "Goiatuba",
+      "Goiás",
+      "Inhumas",
+      "Jataiense",
+      "Vila Nova"
+    ]
+  },
+  "MA": {
+    "1ª Divisão": [
+      "IAPE",
+      "Imperatriz",
+      "ITZ Sport",
+      "Luminense",
+      "Maranhão",
+      "Moto Club",
+      "Sampaio Corrêa",
+      "Tuntum"
+    ]
+  },
+  "MT": {
+    "1ª Divisão": [
+      "Chapada",
+      "Cuiabá",
+      "Luverdense",
+      "Mixto",
+      "Nova Mutum",
+      "Operário VG",
+      "Primavera",
+      "Sport Sinop",
+      "União de Rondonópolis",
+      "Várzea Grande"
+    ],
+    "2ª Divisão": [
+      "Atlético-MT",
+      "Ação",
+      "Campo Novo",
+      "Cacerense",
+      "Paulistano",
+      "Santa Cruz",
+      "Sinop",
+      "Sorriso FC",
+      "Sorriso EC",
+      "Uirapuru"
+    ]
+  },
+  "MS": {
+    "1ª Divisão": [
+      "Águia Negra",
+      "Aquidauana",
+      "Bataguassu",
+      "Corumbaense",
+      "Costa Rica",
+      "Dourados",
+      "Ivinhema",
+      "Naviraiense",
+      "Operário-MS",
+      "Pantanal"
+    ],
+    "2ª Divisão": [
+      "7 de Setembro",
+      "Aquidauanense",
+      "Campo Grande",
+      "Comercial-MS",
+      "Misto",
+      "São Gabriel",
+      "Taveirópolis",
+      "União ABC"
+    ]
+  },
+  "MG": {
+    "Módulo I": [
+      "América-MG",
+      "Atlético-MG",
+      "Athletic",
+      "Betim",
+      "Cruzeiro",
+      "Democrata-GV",
+      "Itabirito",
+      "North",
+      "Pouso Alegre",
+      "Tombense",
+      "Uberlândia",
+      "URT"
+    ],
+    "Módulo II": [
+      "Aymorés",
+      "Boa Esporte",
+      "Caldense",
+      "Coimbra",
+      "Democrata-SL",
+      "Guarani",
+      "Ipatinga",
+      "Mamoré",
+      "Patrocinense",
+      "Uberaba",
+      "Valeriodoce",
+      "Villa Nova"
+    ],
+    "Segunda Divisão": [
+      "Araxá",
+      "Betim B",
+      "Funorte",
+      "Inter de Minas",
+      "Nacional de Muriaé",
+      "Nova Lavras",
+      "Novo Esporte",
+      "Paracatu",
+      "Santarritense",
+      "São João del-Rei",
+      "Siderúrgica",
+      "Venda Nova"
+    ]
+  },
+  "PA": {
+    "1ª Divisão": [
+      "Águia de Marabá",
+      "Amazônia",
+      "Bragantino-PA",
+      "Cametá",
+      "Capitão Poço",
+      "Castanhal",
+      "Paysandu"
+    ],
+    "2ª Divisão": [
+      "Atlético Paraense",
+      "Caeté",
+      "Canaã",
+      "Carajás",
+      "Independente",
+      "Itupiranga",
+      "Izabelense",
+      "Marajó",
+      "Paragominas",
+      "Santos-PA",
+      "União Paraense",
+      "Urumajó"
+    ],
+    "3ª Divisão": [
+      "Altamira",
+      "Belenense",
+      "ESMAC",
+      "Gavião Kyikatejé",
+      "Paraense",
+      "Parauapebas",
+      "Pedreira",
+      "Pinheirense",
+      "Sport Belém",
+      "Tesla",
+      "Tiradentes",
+      "Vênus",
+      "Vila Rica"
+    ]
+  },
+  "PB": {
+    "1ª Divisão": [
+      "Atlético de Cajazeiras",
+      "Botafogo-PB",
+      "Campinense",
+      "Confiança-PB",
+      "Esporte de Patos",
+      "Nacional de Patos",
+      "Pombal",
+      "Serra Branca",
+      "Sousa",
+      "Treze"
+    ],
+    "2ª Divisão": [
+      "Atlético de Santa Rita",
+      "Auto Esporte",
+      "Cruzeiro-PB",
+      "Desportiva Guarabira",
+      "Femar",
+      "Picuiense",
+      "São Paulo Crystal",
+      "Spartax",
+      "Serrano-PB",
+      "Sport-PB"
+    ]
+  },
+  "PR": {
+    "1ª Divisão": [
+      "Andraus",
+      "Athletico-PR",
+      "Azuriz",
+      "Cascavel",
+      "Cianorte",
+      "Coritiba",
+      "Foz do Iguaçu",
+      "Galo Maringá",
+      "Londrina",
+      "Maringá",
+      "Operário-PR",
+      "São Joseense"
+    ],
+    "2ª Divisão": [
+      "Araucária",
+      "Batel",
+      "Laranja Mecânica",
+      "Nacional",
+      "Paranavaí",
+      "Paraná Clube",
+      "Patriotas",
+      "Prudentópolis",
+      "Rio Branco",
+      "Toledo"
+    ],
+    "3ª Divisão": [
+      "Cambé",
+      "City London",
+      "HOPE Internacional",
+      "Iguaçu",
+      "Iraty",
+      "Oeste Brasil",
+      "Portuguesa Londrinense",
+      "PSTC",
+      "Samas",
+      "Sport Club Campo Mourão",
+      "União"
+    ]
+  },
+  "PE": {
+    "1ª Divisão A1 2026": [
+      "Decisão",
+      "Jaguar",
+      "Maguary",
+      "Náutico",
+      "Retrô",
+      "Santa Cruz",
+      "Sport",
+      "Vitória de Santo Antão"
+    ],
+    "2026/27 novo formato unificado (24 clubes)": []
+  },
+  "PI": {
+    "1ª Divisão": [
+      "Altos",
+      "Atlético Piauiense",
+      "Corisabbá",
+      "Fluminense-PI",
+      "Oeirense",
+      "Parnahyba",
+      "Piauí",
+      "Teresina"
+    ]
+  },
+  "RJ": {
+    "Série A": [
+      "Bangu",
+      "Boavista",
+      "Botafogo",
+      "Flamengo",
+      "Fluminense",
+      "Madureira",
+      "Maricá",
+      "Nova Iguaçu",
+      "Portuguesa-RJ",
+      "Sampaio Corrêa-RJ",
+      "Vasco",
+      "Volta Redonda"
+    ],
+    "Série A2": [
+      "America-RJ",
+      "Americano",
+      "Araruama",
+      "Audax Rio",
+      "Bangu",
+      "Bonsucesso",
+      "Cabofriense",
+      "Olaria",
+      "Pérolas Negras",
+      "Resende",
+      "São Gonçalo",
+      "Serrano"
+    ],
+    "Série B1": [
+      "Audax Rio",
+      "Campo Grande",
+      "Carapebus",
+      "Duque de Caxias",
+      "Goytacaz",
+      "Macaé",
+      "Niteroiense",
+      "Nova Cidade",
+      "Petrópolis",
+      "São Cristóvão",
+      "Serrano",
+      "Artsul"
+    ],
+    "Série B2": [
+      "7 de Abril",
+      "Barra Mansa",
+      "Belford Roxo",
+      "Búzios",
+      "Campos",
+      "Cardoso Moreira",
+      "Friburguense",
+      "Paduano",
+      "Paraty",
+      "Rio de Janeiro",
+      "Santa Cruz",
+      "Serra Macaense"
+    ],
+    "Série C": [
+      "CAAC Brasil",
+      "Campos Atlético",
+      "Barra Mansa",
+      "Mageense",
+      "EC Resende",
+      "Vera Cruz",
+      "União Central",
+      "Barcelona",
+      "Uni Souza",
+      "Tigres do Brasil",
+      "Itaboraí Profute",
+      "Brescia",
+      "Cardoso Moreira"
+    ]
+  },
+  "RN": {
+    "1ª Divisão": [
+      "ABC",
+      "América-RN",
+      "Globo FC",
+      "Laguna",
+      "Potiguar de Mossoró",
+      "Potyguar Seridoense",
+      "QFC",
+      "Santa Cruz de Natal"
+    ],
+    "2ª Divisão": [
+      "Alecrim",
+      "Baraúnas",
+      "Mossoró",
+      "Palmeira",
+      "Parnamirim",
+      "Visão Celeste"
+    ]
+  },
+  "RS": {
+    "1ª Divisão": [
+      "Avenida",
+      "Caxias",
+      "Grêmio",
+      "Guarany de Bagé",
+      "Internacional",
+      "Inter-SM",
+      "Juventude",
+      "Monsoon",
+      "Novo Hamburgo",
+      "São José",
+      "São Luiz",
+      "Ypiranga"
+    ],
+    "2ª Divisão": [
+      "Aimoré",
+      "Apafut",
+      "Bagé",
+      "Brasil de Farroupilha",
+      "Brasil de Pelotas",
+      "Esportivo",
+      "Gaúcho",
+      "Glória",
+      "Gramadense",
+      "Guarani-VA",
+      "Lajeadense",
+      "Passo Fundo",
+      "Pelotas",
+      "Santa Cruz",
+      "União Frederiquense",
+      "Veranópolis"
+    ],
+    "3ª Divisão": [
+      "Clube 1992",
+      "Cruz Alta",
+      "Farroupilha",
+      "Futebol Com Vida",
+      "Novo Horizonte",
+      "Panambi",
+      "Real Sport",
+      "Rio Grande",
+      "Riograndense-RG",
+      "São Paulo-RG"
+    ]
+  },
+  "RO": {
+    "1ª Divisão": [
+      "Barcelona-RO",
+      "Gazin Porto Velho",
+      "Genus",
+      "Guaporé",
+      "Ji-Paraná",
+      "Rondoniense",
+      "União Cacoalense"
+    ]
+  },
+  "RR": {
+    "1ª Divisão": [
+      "Baré",
+      "GAS",
+      "Monte Roraima",
+      "Náutico-RR",
+      "Progresso",
+      "Rio Negro-RR",
+      "River-RR",
+      "Roraima",
+      "São Raimundo-RR"
+    ]
+  },
+  "SC": {
+    "1ª Divisão": [
+      "Avaí",
+      "Barra",
+      "Brusque",
+      "Camboriú",
+      "Carlos Renaux",
+      "Chapecoense",
+      "Concórdia",
+      "Criciúma",
+      "Figueirense",
+      "Joinville",
+      "Marcílio Dias",
+      "Santa Catarina"
+    ],
+    "2ª Divisão": [
+      "Blumenau",
+      "Caravaggio",
+      "Fluminense",
+      "Guarani",
+      "Hercílio Luz",
+      "Jaraguá",
+      "Juventus",
+      "Metropolitano",
+      "Nação",
+      "Tubarão"
+    ],
+    "3ª Divisão": [
+      "Caçador",
+      "Internacional de Lages",
+      "Manchester",
+      "Porto"
+    ]
+  },
+  "SP": {
+    "A1": [
+      "Botafogo-SP",
+      "Capivariano",
+      "Corinthians",
+      "Guarani",
+      "Mirassol",
+      "Novorizontino",
+      "Noroeste",
+      "Palmeiras",
+      "Ponte Preta",
+      "Portuguesa",
+      "Primavera",
+      "Red Bull Bragantino",
+      "Santos",
+      "São Bernardo",
+      "São Paulo",
+      "Velo Clube"
+    ],
+    "A2": [
+      "Água Santa",
+      "Atlético Monte Azul",
+      "Juventus",
+      "Linense",
+      "Votuporanguense",
+      "Santo André",
+      "São Bento",
+      "Taubaté",
+      "XV de Piracicaba",
+      "Ferroviária",
+      "Grêmio Prudente",
+      "Oeste",
+      "São José",
+      "Sertãozinho",
+      "Inter de Limeira"
+    ],
+    "A3": [
+      "Portuguesa Santista",
+      "Rio Claro",
+      "Marília",
+      "Rio Branco",
+      "Desportivo Brasil",
+      "União São João",
+      "Catanduva",
+      "Itapirense",
+      "Rio Preto",
+      "União Suzano",
+      "XV de Jaú",
+      "Francana",
+      "EC São Bernardo",
+      "Bandeirante",
+      "União Barbarense",
+      "Paulista"
+    ],
+    "A4": [
+      "Lemense",
+      "Comercial",
+      "Araçatuba",
+      "Nacional",
+      "Taquaritinga",
+      "Joseense",
+      "São Caetano",
+      "Colorado Caieiras",
+      "Inter de Bebedouro",
+      "VOCEM",
+      "Jabaquara",
+      "Penapolense",
+      "Barretos",
+      "Grêmio São-Carlense",
+      "Tanabi",
+      "ECUS"
+    ],
+    "Segunda Divisão": [
+      "América-SP",
+      "CA Assisense",
+      "José Bonifácio",
+      "Riopretano",
+      "Santa Fé",
+      "Tupã",
+      "Santacruzense",
+      "Grêmio Catanduvense",
+      "Independente",
+      "Mogi Mirim",
+      "São Carlos",
+      "Matonense",
+      "Flamengo-SP",
+      "AD Guarulhos",
+      "Osasco Audax",
+      "Paulínia",
+      "SC Paulinense",
+      "Votoraty",
+      "Manthiqueira",
+      "Barcelona Capela",
+      "Mauaense",
+      "Itaquaquecetuba",
+      "Mauá FC",
+      "União Mogi"
+    ]
+  },
+  "SE": {
+    "1ª Divisão": [
+      "América de Propriá",
+      "Atlético Gloriense",
+      "Confiança",
+      "Desportiva Aracaju",
+      "Dorense",
+      "Falcon",
+      "Guarany",
+      "Itabaiana",
+      "Lagarto",
+      "Sergipe"
+    ],
+    "2ª Divisão": [
+      "América de Pedrinhas",
+      "Barra",
+      "Canindé",
+      "Carmópolis",
+      "Estanciano",
+      "Frei Paulistano",
+      "Flamengo-SE",
+      "Independente",
+      "Maruinense",
+      "Olímpico",
+      "Socorrense",
+      "Socorro Sport"
+    ]
+  },
+  "TO": {
+    "1ª Divisão": [
+      "Araguaína",
+      "Bela Vista",
+      "Capital-TO",
+      "Guaraí",
+      "Gurupi",
+      "Palmas",
+      "Tocantinópolis"
+    ],
+    "2ª Divisão": [
+      "Araguaia de Palmas",
+      "Batalhão",
+      "Guaraí",
+      "Interporto",
+      "Paraíso",
+      "São José-TO",
+      "Taquarussú",
+      "União de Palmas"
+    ]
+  }
+}

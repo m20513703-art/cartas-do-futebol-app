@@ -1,0 +1,4 @@
+'use strict';
+const assert=require('assert');const d=require('./brazil-2026-data');
+const seriesD=require('./brazil-2026-series-d-groups.json');const cb=require('./brazil-2026-copa-brasil-entrants.json');
+assert.deepStrictEqual(d.validate(),[]);assert.equal(d.stateClubs.DF['1ª Divisão'].join('|'),'Brasiliense|Brasília|Capital|Ceilândia|Gama|Paranoá|Real Brasília|Samambaia|Sobradinho|ARUC');assert.equal(d.stateClubs.AM['1ª Divisão'].length,7);assert(!d.stateClubs.AM['1ª Divisão'].includes('Amazonas FC'));assert(!d.stateClubs.PE['2026/27 novo formato unificado (24 clubes)'].length);assert.equal(d.stateSummary().length,27);assert.equal(Object.keys(seriesD).length,16);assert(Object.values(seriesD).every(g=>g.length===6));assert.equal(Object.values(seriesD).flat().length,96);assert.equal(Object.values(cb).flat().length,126);assert(d.formats.unknowns.length>=3);console.log('Brazil 2026 data checks passed');

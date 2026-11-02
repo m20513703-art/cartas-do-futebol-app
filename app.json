@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Futebol Top",
-    "slug": "cartas-do-futebol",
-    "version": "1.3.6",
+    "name": "Futebol Top Brasil 2026",
+    "slug": "futebol-top-brasil-2026",
+    "version": "2.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "icon": "./icon.png",
     "android": {
-      "package": "com.mmsistemastecnologia.cartasfutebol",
-      "versionCode": 14,
+      "package": "com.mmsistemastecnologia.futeboltopbrasil2026",
+      "versionCode": 1,
       "edgeToEdgeEnabled": false,
       "adaptiveIcon": {
         "foregroundImage": "./icon.png",
@@ -17,7 +17,7 @@
       }
     },
     "ios": {
-      "bundleIdentifier": "com.mmsistemastecnologia.cartasfutebol"
+      "bundleIdentifier": "com.mmsistemastecnologia.futeboltopbrasil2026"
     }
   }
 }

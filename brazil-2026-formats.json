@@ -1,0 +1,59 @@
+{
+  "jurisdiction": "Brasil",
+  "season": 2026,
+  "knownStateRules": {
+    "general": {
+      "promotionRelegation": "Dois sobem e dois caem nos estaduais quando a competição tiver divisão de acesso; a lista/regra deve respeitar a informação fornecida para cada federação. Não fornecida = desconhecida.",
+      "incompleteData": "Listas e formatos estaduais não enviados permanecem marcados como não fornecidos; não completar com clubes inventados."
+    },
+    "df": {
+      "competition": "1ª Divisão do Distrito Federal",
+      "clubs": 10,
+      "format": "Regra de disputa não fornecida."
+    },
+    "pernambuco": {
+      "2026": "A1 com oito clubes listados.",
+      "2026/27": "Novo formato unificado de 24 clubes conforme informado; participantes e regulamento detalhado não fornecidos."
+    }
+  },
+  "national": {
+    "Série A": {
+      "clubs": 20,
+      "rounds": 38,
+      "format": "pontos corridos, ida e volta",
+      "promoted": 0,
+      "relegated": 4
+    },
+    "Série B": {
+      "clubs": 20,
+      "rounds": 38,
+      "format": "pontos corridos, ida e volta; 1º e 2º sobem diretamente; 3º a 6º disputam playoff pelas duas vagas restantes",
+      "promoted": 4,
+      "relegated": 4
+    },
+    "Série C": {
+      "clubs": 20,
+      "firstPhaseMatches": 19,
+      "format": "fase inicial; oito avançam a dois quadrangulares; os dois primeiros de cada quadrangular sobem; líderes dos quadrangulares fazem final",
+      "promoted": 4,
+      "relegated": 2,
+      "2027Teams": 24
+    },
+    "Série D": {
+      "groups": 16,
+      "clubsPerGroup": 6,
+      "totalClubs": 96,
+      "userProvidedGroupData": "16 groups × 6 clubs are stored in brazil-2026-series-d-groups.json as supplied.",
+      "format": "The 2026 group lists supplied by the user have been preserved; detailed group-stage advancement and finals rules were not available in the recorded context.",
+      "engineStatus": "The current match engine remains an older 8×15 format; therefore it is not represented as an exact Série D 2026 season."
+    }
+  },
+  "unknowns": [
+    "Participantes e regras de divisões estaduais sem lista fornecida.",
+    "Clubes restantes e participantes estaduais não informados.",
+    "Regras de classificação continentais detalhadas dependem das vagas fornecidas, sem completar grupos ausentes.",
+    "Listas completas de Série D e grupos foram citadas como entregues, mas o registro disponível contém somente os 16 grupos parcialmente enumerados abaixo.",
+    "The 2026 Série D UI/match engine is not yet connected to the exact 16×6 group list; stored group data remains transparent reference data.",
+    "The 2026 Série D UI/match engine is not yet connected to the exact 16×6 group list; stored group data remains transparent reference data."
+  ]
+}

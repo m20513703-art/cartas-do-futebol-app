@@ -1,0 +1,182 @@
+{
+  "AC": [
+    "Galvez",
+    "Independência",
+    "Vasco-AC"
+  ],
+  "AL": [
+    "ASA",
+    "CRB",
+    "CSA",
+    "Penedense"
+  ],
+  "AP": [
+    "Independente",
+    "Oratório",
+    "Trem"
+  ],
+  "AM": [
+    "Amazonas",
+    "Manauara",
+    "Manaus",
+    "Nacional"
+  ],
+  "BA": [
+    "Atlético de Alagoinhas",
+    "Bahia",
+    "Jacuipense",
+    "Juazeirense",
+    "Porto Vitória",
+    "Vitória"
+  ],
+  "CE": [
+    "Ceará",
+    "Fortaleza",
+    "Maracanã",
+    "Tirol"
+  ],
+  "DF": [
+    "Capital",
+    "Ceilândia",
+    "Gama"
+  ],
+  "ES": [
+    "Desportiva",
+    "Porto Vitória",
+    "Rio Branco"
+  ],
+  "GO": [
+    "Anápolis",
+    "Atlético-GO",
+    "Goiás",
+    "Vila Nova"
+  ],
+  "MA": [
+    "IAPE",
+    "Imperatriz",
+    "Maranhão"
+  ],
+  "MT": [
+    "Cuiabá",
+    "Mixto",
+    "Primavera",
+    "Operário-VG"
+  ],
+  "MS": [
+    "Ivinhema",
+    "Operário-MS",
+    "Pantanal"
+  ],
+  "MG": [
+    "América-MG",
+    "Athletic",
+    "Atlético-MG",
+    "Betim",
+    "Cruzeiro",
+    "Tombense",
+    "Uberlândia"
+  ],
+  "PA": [
+    "Águia de Marabá",
+    "Bragantino-PA",
+    "Castanhal",
+    "Paysandu",
+    "Remo",
+    "Tuna Luso"
+  ],
+  "PB": [
+    "Botafogo-PB",
+    "Serra Branca",
+    "Sousa"
+  ],
+  "PR": [
+    "Athletico-PR",
+    "Azuriz",
+    "Cianorte",
+    "Coritiba",
+    "Londrina",
+    "Maringá",
+    "Operário-PR"
+  ],
+  "PE": [
+    "Maguary",
+    "Retrô",
+    "Santa Cruz",
+    "Sport"
+  ],
+  "PI": [
+    "Altos",
+    "Fluminense-PI",
+    "Piauí"
+  ],
+  "RJ": [
+    "Boavista",
+    "Botafogo",
+    "Flamengo",
+    "Fluminense",
+    "Madureira",
+    "Nova Iguaçu",
+    "Portuguesa-RJ",
+    "Sampaio Corrêa-RJ",
+    "Vasco",
+    "Volta Redonda"
+  ],
+  "RN": [
+    "ABC",
+    "América-RN",
+    "Laguna"
+  ],
+  "RS": [
+    "Caxias",
+    "Grêmio",
+    "Guarany de Bagé",
+    "Internacional",
+    "Juventude",
+    "São Luiz",
+    "Ypiranga-RS"
+  ],
+  "RO": [
+    "Gazin Porto Velho",
+    "Guaporé",
+    "Ji-Paraná"
+  ],
+  "RR": [
+    "Baré",
+    "GAS",
+    "Monte Roraima"
+  ],
+  "SC": [
+    "Avaí",
+    "Barra",
+    "Chapecoense",
+    "Figueirense",
+    "Joinville",
+    "Santa Catarina"
+  ],
+  "SP": [
+    "Corinthians",
+    "Guarani",
+    "Mirassol",
+    "Novorizontino",
+    "Palmeiras",
+    "Ponte Preta",
+    "Portuguesa",
+    "Primavera-SP",
+    "Red Bull Bragantino",
+    "Santos",
+    "São Bernardo",
+    "São Paulo",
+    "Velo Clube"
+  ],
+  "SE": [
+    "América de Propriá",
+    "Confiança",
+    "Itabaiana",
+    "Lagarto"
+  ],
+  "TO": [
+    "Araguaína",
+    "Capital-TO",
+    "Tocantinópolis"
+  ]
+}
