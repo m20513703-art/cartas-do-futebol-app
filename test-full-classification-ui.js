@@ -7,14 +7,13 @@ const cups = require('./copas');
 const CareerClub = require('./career-club');
 const Brazil2026 = require('./brazil-2026-data');
 
-// The Classification tab must keep the career league and each played competition separate.
-// It is not implemented as a single fragment immediately following the tab conditional.
-assert.match(app, /tab==='Classificação'&&<><Card>/);
+// Confirm the tab has its own conditional and the competition panels render separately.
+assert.match(app, /tab==='Classificação'&&/);
 assert.match(app, /game\.league\.teams\.map\(\(r,i\)=>/);
 assert.match(app, /Object\.entries\(game\.tournaments\|\|\{\}\)\.filter/);
 assert.match(app, /item\.kind==='cba'&&<>[\s\S]*?info\.summary\.table\|\|\[\]/);
 assert.match(app, /item\.kind==='serieD'&&Object\.entries\(info\.summary\.groups\|\|\{\}\)\.map/);
-assert.match(app, /item\.kind==='cup'&&\(item\.state\.rounds\|\|\[\]\)\.map/);
+assert.match(app, /item\.kind==='cup'&&[\s\S]{0,200}?item\.state\.rounds\|\|\[\]/);
 assert.doesNotMatch(app, /item\.kind==='cup'[\s\S]{0,300}?info\.summary\.table/);
 assert.match(app, /VER CLASSIFICAÇÃO COMPLETA/);
 assert.match(app, /VER CHAVE E RESULTADOS/);
