@@ -2,14 +2,14 @@
   "expo": {
     "name": "Futebol Top",
     "slug": "cartas-do-futebol",
-    "version": "1.3.5",
+    "version": "1.3.6",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "icon": "./icon.png",
     "android": {
       "package": "com.mmsistemastecnologia.cartasfutebol",
-      "versionCode": 13,
+      "versionCode": 14,
       "edgeToEdgeEnabled": false,
       "adaptiveIcon": {
         "foregroundImage": "./icon.png",

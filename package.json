@@ -1,12 +1,12 @@
 {
   "name": "futebol-top",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "test:engines": "node test-serie-d.js && node test-series-cba.js && node test-copas.js && node test-progression-integration.js && node test-club-pools.js"
+    "test:engines": "node test-serie-d.js && node test-series-cba.js && node test-copas.js && node test-progression-integration.js && node test-club-pools.js && node test-tournament-recovery.js && node test-tournament-recovery.js"
   },
   "dependencies": {
     "expo": "~54.0.0",
