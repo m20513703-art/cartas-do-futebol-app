@@ -8,7 +8,7 @@ for (const d of ['A1','A2','A3','A4']) {
   if(d==='A1') { assert.equal(plan.fixtures.filter(x=>x.home==='Clube 1'||x.away==='Clube 1').length,8); assert.equal(plan.potMapping,'not-supplied'); }
   else { assert.equal(plan.fixtures.length,120); for(const n of clubs) assert.equal(plan.fixtures.filter(x=>x.home===n||x.away===n).length,15); }
 }
-const g=P.a2Groups(clubs); assert.deepEqual(g.A,['Clube 1','Clube 3','Clube 6','Clube 8']); assert.deepEqual(g.B,['Clube 2','Clube 4','Clube 5','Clube 7']); assert.equal(P.roundRobin(g.A,2).length,12);
+const g=P.a2Groups(clubs.slice(0,8)); assert.deepEqual(g.A,['Clube 1','Clube 3','Clube 6','Clube 8']); assert.deepEqual(g.B,['Clube 2','Clube 4','Clube 5','Clube 7']); assert.equal(P.roundRobin(g.A,2).length,12);
 assert.equal(P.qualifiers('A1',table).length,8); assert.equal(P.playoffPairings('A1',P.qualifiers('A1',table)).length,4);
 assert.equal(P.resolveTie('A1','quarterfinals',{home:1,away:1}).requiresPenalties,true); assert.equal(P.resolveTie('A1','final',{home:1,away:1}).requiresPenalties,true);
 assert.equal(P.resolveTie('A2','semifinal',{home:1,away:1},{homeRank:2,awayRank:3}).winner,'home'); assert.equal(P.resolveA2FinalTie(),'unresolved');
