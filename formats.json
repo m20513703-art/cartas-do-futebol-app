@@ -1,0 +1,265 @@
+{
+  "jurisdiction": "Brasil",
+  "season": 2026,
+  "knownStateRules": {
+    "general": {
+      "promotionRelegation": "Dois sobem e dois caem nos estaduais quando a competição tiver divisão de acesso; a lista/regra deve respeitar a informação fornecida para cada federação. Não fornecida = desconhecida.",
+      "incompleteData": "Listas e formatos estaduais não enviados permanecem marcados como não fornecidos; não completar com clubes inventados.",
+      "futureSeasons": "The user supplies participant lists for each new season; do not invent clubs or future entrants."
+    },
+    "df": {
+      "competition": "1ª Divisão do Distrito Federal",
+      "clubs": 10,
+      "format": "Regra de disputa não fornecida."
+    },
+    "pernambuco": {
+      "2026": "A1 com oito clubes listados.",
+      "2026/27": "Novo formato unificado de 24 clubes conforme informado; participantes e regulamento detalhado não fornecidos."
+    },
+    "saoPaulo": {
+      "season": 2026,
+      "divisions": {
+        "A1": {
+          "clubs": 16,
+          "phase1": "8 matches per club, no groups",
+          "phase1OpponentPots": "3 from own pot and 5 from other pots; pot assignments not supplied",
+          "qualifiers": 8,
+          "quarterfinals": {
+            "matches": 1,
+            "tie": "penalties"
+          },
+          "semifinals": {
+            "matches": 1,
+            "tie": "penalties"
+          },
+          "final": {
+            "legs": 2,
+            "tie": "aggregate penalties"
+          },
+          "relegated": 2,
+          "destination": "A2"
+        },
+        "A2": {
+          "clubs": 16,
+          "phase1": "single round robin",
+          "qualifiers": 8,
+          "groups": {
+            "A": [
+              1,
+              3,
+              6,
+              8
+            ],
+            "B": [
+              2,
+              4,
+              5,
+              7
+            ]
+          },
+          "groupLegs": 2,
+          "groupQualifiers": 2,
+          "semifinals": {
+            "legs": 2,
+            "tie": "best campaign"
+          },
+          "promoted": 2,
+          "final": {
+            "purpose": "champion",
+            "tie": "unspecified"
+          },
+          "relegated": 2,
+          "destination": "A3",
+          "cities": {
+            "Água Santa": "Diadema",
+            "Ferroviária": "Araraquara",
+            "Grêmio Prudente": "Presidente Prudente",
+            "Internacional de Limeira": "Limeira",
+            "Ituano": "Itu",
+            "Juventus": "São Paulo",
+            "Linense": "Lins",
+            "Monte Azul": "Monte Azul Paulista",
+            "Oeste": "Barueri",
+            "Santo André": "Santo André",
+            "São Bento": "Sorocaba",
+            "São José": "São José dos Campos",
+            "Sertãozinho": "Sertãozinho",
+            "Taubaté": "Taubaté",
+            "Votuporanguense": "Votuporanga",
+            "XV de Piracicaba": "Piracicaba"
+          }
+        },
+        "A3": {
+          "clubs": 16,
+          "phase1": "single round robin",
+          "qualifiers": 8,
+          "quarterfinals": {
+            "legs": 2,
+            "tie": "penalties"
+          },
+          "semifinals": {
+            "legs": 2,
+            "tie": "penalties"
+          },
+          "final": {
+            "legs": 2,
+            "tie": "penalties"
+          },
+          "promoted": 2,
+          "relegated": 2,
+          "destination": "A4"
+        },
+        "A4": {
+          "clubs": 16,
+          "phase1": "single round robin",
+          "qualifiers": 8,
+          "quarterfinals": {
+            "legs": 2,
+            "tie": "best campaign"
+          },
+          "semifinals": {
+            "legs": 2,
+            "tie": "best campaign"
+          },
+          "final": {
+            "legs": 2,
+            "tie": "best campaign"
+          },
+          "promoted": 2,
+          "relegated": 2,
+          "destination": "Segunda Divisão Sub-23/Bezinha"
+        },
+        "Bezinha": {
+          "clubs": 24,
+          "groups": 4,
+          "clubsPerGroup": 6,
+          "phase1": "double round-robin",
+          "matchesPerClub": 10,
+          "qualifiersPerGroup": 4,
+          "roundOf16": "knockout; aggregate tie resolves on penalties",
+          "quarterfinals": "knockout; number of legs and tie-break unspecified",
+          "semifinals": "knockout; number of legs and tie-break unspecified",
+          "final": "winner is champion; number of legs and tie-break unspecified",
+          "promotedFinalists": 2,
+          "promotionDestination": "A4",
+          "promotionSeason": 2027,
+          "rosterFile": "brazil-2026-bezinha-groups.json",
+          "rosterStatus": "complete-user-supplied-roster"
+        }
+      },
+      "mechanicsOnly": true,
+      "noRuleProseInUi": true
+    }
+  },
+  "national": {
+    "Copa do Brasil": {
+      "season": 2026,
+      "entrants": 126,
+      "entrantListFile": "brazil-2026-copa-brasil-entrants.json",
+      "entrantListStatus": "The 2026 user-supplied roster is preserved verbatim, including any duplicate-name/data-quality issue; do not deduplicate, add, remove, or rename entrants to force a unique count.",
+      "entrantListDataQuality": {
+        "status": "Pending verification if exact supplied roster has duplicate names or not 126 unique names. Preserve every entry as supplied; do not deduplicate or invent replacements.",
+        "sourceFile": "brazil-2026-copa-brasil-entrants.json"
+      },
+      "entrantCountValidation": {
+        "expectedNamedEntrants": 126,
+        "actualNamedEntrants": 126,
+        "status": "Preserve the 126 supplied entries exactly as received. Any discrepancy in unique names is pending data-quality verification; do not reconcile by changing the roster."
+      },
+      "eligibilityFormulaLatestSupplied": {
+        "status": "Historical rule only; superseded for determining entrants by the later 126-name user-supplied list and latest R1–R9 rule. Never generate future participants from this formula.",
+        "priorFormula": "3 eligible per UF × 27 federative units + Série A 20 + Série B 20 + state-cup champions 5 = 126"
+      },
+      "selectedFormatPerLatestUserCorrection": "Use exactly the latest user-supplied R1–R9 rules below. Earlier conflicting proposals and qualification rules are superseded. The 2026 entrant list remains the user-supplied list.",
+      "phaseCount": 9,
+      "phaseRulesLatestUserCorrection": {
+        "R1": "28 one-match entrants -> 14 advance.",
+        "R2": "14 R1 qualifiers + 50 entrants = 64 -> 32 advance.",
+        "R3": "32 R2 qualifiers + 20 Série B entrants = 52 -> 26 advance.",
+        "R4": "26 qualifiers play; 13 advance; user literal says “only the two worst-qualified play each other to produce 12 qualifiers”. This is arithmetically ambiguous; the mechanic is unresolved. Do not invent how to select or play this bracket.",
+        "R5": "12 qualifiers + 20 Série A entrants.",
+        "R6": "Selects 16 qualifiers.",
+        "R7": "Selects 8 qualifiers.",
+        "R8": "Selects 4 qualifiers.",
+        "R9": "Final."
+      },
+      "R4MechanicStatus": "Unresolved: retain user literal exactly. It is arithmetically ambiguous; do not invent a selection or bracket mechanic.",
+      "futureSeasonEntrants": "The user supplies participant lists for each new season. Do not generate, infer, roll forward, or substitute future entrants automatically.",
+      "finalSelectedByLatestUserCorrection": "R9 final. No additional date or match-leg details are specified by the latest rule.",
+      "libertadoresQualification": {
+        "retainedRule": "Champion direct Libertadores; vice pre-Libertadores.",
+        "status": "Latest user-supplied rule."
+      },
+      "formatRevisionNotes": [
+        "Latest exact user-supplied Copa do Brasil format is R1–R9, recorded in phaseRulesLatestUserCorrection.",
+        "R4 mechanic remains unresolved; no bracket or selection mechanism may be invented.",
+        "Future season participants must come only from user-provided lists."
+      ],
+      "awards": "Financial prize per phase, trophy and medals; prize amounts not supplied."
+    },
+    "Série A": {
+      "clubs": 20,
+      "rounds": 38,
+      "format": "pontos corridos, ida e volta",
+      "promoted": 0,
+      "relegated": 4
+    },
+    "Série B": {
+      "clubs": 20,
+      "rounds": 38,
+      "format": "pontos corridos, ida e volta; 1º e 2º sobem diretamente; 3º a 6º disputam playoff pelas duas vagas restantes",
+      "promoted": 4,
+      "relegated": 4
+    },
+    "Série C": {
+      "clubs": 20,
+      "firstPhaseMatches": 19,
+      "format": "fase inicial; oito avançam a dois quadrangulares; os dois primeiros de cada quadrangular sobem; líderes dos quadrangulares fazem final",
+      "promoted": 4,
+      "relegated": 2,
+      "2027Teams": 24
+    },
+    "Série D": {
+      "groups": 16,
+      "clubsPerGroup": 6,
+      "totalClubs": 96,
+      "userProvidedGroupData": "16 groups × 6 clubs are stored in brazil-2026-series-d-groups.json as supplied.",
+      "format": "The 2026 group lists supplied by the user have been preserved; detailed group-stage advancement and finals rules were not available in the recorded context.",
+      "engineStatus": "The current match engine remains an older 8×15 format; therefore it is not represented as an exact Série D 2026 season.",
+      "qualificationRules": {
+        "status": "user-supplied rules; annual CBF criteria may change",
+        "stateLeagueSlots": {
+          "SP": 4,
+          "RJ": 3,
+          "MG": 3,
+          "RS": 3,
+          "PR": 3,
+          "CE": 3,
+          "GO": 3,
+          "SC": 3,
+          "BA": 3,
+          "allOtherStatesAndDF": 2
+        },
+        "additionalPossiblePaths": [
+          "relegated Série C clubs",
+          "previous-season Série D performance under that edition's rules",
+          "CBF national ranking"
+        ],
+        "annualChangeNotice": "CBF may change annual quotas and qualification criteria; use the lists and rules supplied for each season.",
+        "knownInconsistency": {
+          "issue": "The earlier supplied Série C 2026 rule says the bottom two clubs are relegated to Série D, while the later supplied Série D qualification rule says the four last Série C clubs are relegated.",
+          "status": "Pending clarification. Do not silently choose or implement a relegation count."
+        },
+        "futureSeasons": "The user will supply participant lists for each new season. Never invent future entrants; accept only user-supplied lists."
+      }
+    }
+  },
+  "unknowns": [
+    "Participantes e regras de divisões estaduais sem lista fornecida.",
+    "Clubes restantes e participantes estaduais não informados.",
+    "Regras de classificação continentais detalhadas dependem das vagas fornecidas, sem completar grupos ausentes.",
+    "Listas completas de Série D e grupos foram citadas como entregues, mas o registro disponível contém somente os 16 grupos parcialmente enumerados abaixo.",
+    "Série C relegation count remains inconsistent in the supplied rules: earlier Série C data says two relegated, newer Série D rule says four; pending clarification.",
+    "Future-season participant lists must be supplied by the user; do not generate participants."
+  ]
+}
