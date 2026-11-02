@@ -138,7 +138,6 @@ function outcomesForPromotion(division, result) {
   return { promoted: false, destination: null };
 }
 
-module.exports = { DIVISIONS, BEZINHA_GROUPS, BEZINHA_2026, roundRobin, shuffledPartial, campaignTable, a2Groups, aggregateTie, outcomes, planSeason, qualifiers, resolveA2Group, playoffPairings, resolveTie, nextAfterStage, relegateBottomTwo, bezaineEdition, fixturesForStage, resolveA2FinalTie, resolveBestCampaignTie, outcomesForPromotion, bezainePhase1Fixtures, bezaineQualifiers, bezaineRoundOf16, bezaineStageRule };
 const BEZINHA_GROUPS = Object.freeze({
   '1': Object.freeze(['América-SP', 'Assisense', 'José Bonifácio', 'Riopretano', 'Santa Fé', 'Tupã']),
   '2': Object.freeze(['Santacruzense', 'Grêmio Catanduvense', 'Independente de Limeira', 'Mogi Mirim', 'São Carlos', 'Matonense']),
@@ -177,3 +176,5 @@ function planSeason(division, teams) {
   if (division === 'A1') return { division, status, phase: 'phase1', fixtures: shuffledPartial(teams, d.matchesPerClub), potMapping: 'not-supplied', phase1FixturesPerClub: d.matchesPerClub };
   return { division, status, phase: 'phase1', fixtures: roundRobin(teams, 1), phasesAfterLeague: clone(d) };
 }
+
+module.exports = { DIVISIONS, BEZINHA_GROUPS, BEZINHA_2026, roundRobin, shuffledPartial, campaignTable, a2Groups, aggregateTie, outcomes, planSeason, qualifiers, resolveA2Group, playoffPairings, resolveTie, nextAfterStage, relegateBottomTwo, bezaineEdition, fixturesForStage, resolveA2FinalTie, resolveBestCampaignTie, outcomesForPromotion, bezainePhase1Fixtures, bezaineQualifiers, bezaineRoundOf16, bezaineStageRule };
