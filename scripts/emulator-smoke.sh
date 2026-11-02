@@ -1,7 +1,23 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 APK="$GITHUB_WORKSPACE/android/app/build/outputs/apk/release/app-release.apk"
-PKG=com.mmsistemastecnologia.cartasfutebol
+test -s "$APK"
+# Derive the configured Android applicationId and independently verify the APK.
+PKG=$(python3 - "$GITHUB_WORKSPACE/app.json" <<'PYAPP'
+import json,sys
+with open(sys.argv[1], encoding="utf-8") as f:
+    package=json.load(f)["expo"]["android"]["package"]
+if not isinstance(package,str) or not package or "." not in package:
+    raise SystemExit("Invalid expo.android.package in app.json")
+print(package)
+PYAPP
+)
+AAPT="${ANDROID_HOME:?ANDROID_HOME is required}/build-tools/35.0.0/aapt"
+APK_PKG=$("$AAPT" dump badging "$APK" | sed -n "s/^package: name='\([^']*\)'.*/\1/p" | head -1)
+if [ -z "$APK_PKG" ] || [ "$APK_PKG" != "$PKG" ]; then
+  echo "APK applicationId mismatch: app.json=$PKG APK=${APK_PKG:-<missing>}" >&2
+  exit 1
+fi
 EVIDENCE="$GITHUB_WORKSPACE/evidence"
 mkdir -p "$EVIDENCE"
 collect_evidence() {
@@ -18,8 +34,7 @@ collect_evidence() {
   return "$rc"
 }
 trap collect_evidence EXIT
-echo "APK=$APK"
-test -s "$APK"
+echo "APK=$APK (applicationId=$PKG)"
 adb wait-for-device
 for i in $(seq 1 90); do
   boot=$(adb shell getprop sys.boot_completed | tr -d '\r' || true)
