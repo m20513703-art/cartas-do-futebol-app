@@ -25,38 +25,71 @@
       "entrantListStatus": "The user-supplied named list is preserved as the initial 2026 entrants; it contains exactly 126 unique clubs. This submitted list is not silently reconciled with the later proposed eligibility formula.",
       "eligibilityFormulaLatestSupplied": {
         "calculation": "3 eligible per UF × 27 federative units (26 states + Federal District) + Série A 20 + Série B 20 + state-cup champions 5 = 126",
+        "unitExplanation": "The user used '27 states' colloquially; Brazil has 26 states plus the Federal District, totaling 27 federative units/UFs.",
+        "submittedListVsFormula": "The supplied 126-name list remains the initial 2026 participant roster. Some federation subtotals differ from three each; the later formula is an eligibility rule, not a replacement roster. Keep the discrepancy explicit; do not add/delete clubs to force a match.",
         "inconsistency": "This formula's eligibility quotas/categories may not match the already supplied 126 named entrants. Preserve the submitted named list; do not replace participants without clarification.",
-        "cupChampionSlotCompetitions": ["Copa Paulista", "Copa Rio", "Copa FGF", "Copa Santa Catarina", "Copa do Nordeste"],
+        "cupChampionSlotCompetitions": [
+          "Copa Paulista",
+          "Copa Rio",
+          "Copa FGF",
+          "Copa Santa Catarina",
+          "Copa do Nordeste"
+        ],
         "cupChampionSlotClarification": "The user confirmed these are five competitions. Copa do Nordeste's six listed clubs are the eligible entrants to that competition, not six qualification slots; no ambiguity remains about the five competitions."
       },
-      "roundsLatestSupplied": ["R1", "R2", "R3", "R16", "Quarterfinals", "Semifinals", "Final"],
-      "roundCountLatestSupplied": 7,
+      "selectedFormatPerLatestUserCorrection": "Retain previous rules, not the newer seven-phase/two-leg proposal.",
+      "retainedPreviousFormat": {
+        "phaseCount": 9,
+        "phase5": "Round of 32",
+        "final": "Single match on December 6 (previously specified)",
+        "knockoutAndTieRules": "Retain prior supplied knockout/tie rules; newer proposal is superseded."
+      },
+      "supersededProposal": {
+        "phaseCount": 7,
+        "phases": [
+          "R1",
+          "R2",
+          "R3",
+          "R16",
+          "Quarterfinals",
+          "Semifinals",
+          "Final"
+        ],
+        "final": "Two-legged",
+        "status": "Rejected by latest user correction; keep previous rules."
+      },
       "entrantCountValidation": {
         "expectedNamedEntrants": 126,
         "actualNamedEntrants": 126,
         "actualUniqueNamedEntrants": 126,
         "eligibilityFormulaArithmetic": "3 × 27 + 20 + 20 + 5 = 126",
-        "participantListFormulaMatch": "Unresolved: the formula is a stated quota/categories calculation; supplied names remain the initial 2026 list and are not force-reconciled to it."
+        "participantListFormulaMatch": "The supplied names remain the initial 2026 list and are not force-reconciled to the eligibility formula; federation subtotals differ from a strict three-per-UF allocation."
       },
       "stateCupChampionSlotCompetitions": {
-        "competitions": ["Copa Paulista", "Copa Rio", "Copa FGF", "Copa Santa Catarina", "Copa do Nordeste"],
+        "competitions": [
+          "Copa Paulista",
+          "Copa Rio",
+          "Copa FGF",
+          "Copa Santa Catarina",
+          "Copa do Nordeste"
+        ],
         "competitionCount": 5,
         "CopaDoNordesteEligibleClubs": 6,
         "clarification": "Copa do Nordeste is one of the five competitions; its six clubs are competition entrants, not six slots."
       },
       "awards": "Financial prize per phase, trophy and medals; prize amounts not supplied.",
-      "finalLatestSupplied": "Two-legged final; exact dates not supplied.",
-      "libertadoresLatestRule": "Only the champion qualifies; earlier user instruction said champion to group stage and runner-up to preliminary round, so conflict remains recorded.",
+      "finalSelectedByLatestUserCorrection": "Single match on December 6; do not use newer two-leg proposal.",
+      "libertadoresLatestRule": "Retain previous instruction: champion qualifies for group stage and runner-up for preliminary round; newer champion-only proposal superseded.",
       "formatRevisionNotes": [
-        "Earlier supplied format described nine stages and included a fifth phase/round of 32 for 126 clubs; latest supplied format lists seven stages and no explicit round-of-32 stage. Missing bracket progression/round counts remain unresolved; do not silently reconcile.",
-        "Earlier final was described as a single leg on December 6; latest instruction changes it to two legs. Record the latest two-leg final as the user's correction; exact dates remain unspecified."
+        "Latest correction: retain prior nine phases, including fifth phase/round of 32, previous knockout/tie rules, and single-match final; do not use newer seven-phase/two-leg proposal."
       ],
       "libertadoresQualification": {
-        "latestSupplied": "Only the champion qualifies for Libertadores.",
-        "earlierSupplied": "Champion enters the group stage; runner-up enters the preliminary round.",
-        "status": "Conflicting user-supplied rules; latest version says only champion qualifies. Do not silently discard the earlier runner-up qualification; clarification can be requested if needed."
+        "retainedRule": "Champion to group stage; runner-up to preliminary round.",
+        "supersededProposal": "Only champion qualifies.",
+        "status": "Latest user correction says retain the previous rules, not the newer proposal."
       },
-      "prizes": "Financial prize by phase, trophy and medals; no prize amounts supplied."
+      "prizes": "Financial prize by phase, trophy and medals; no prize amounts supplied.",
+      "roundCountPreviousSelectedByUser": 9
     },
     "Série A": {
       "clubs": 20,
