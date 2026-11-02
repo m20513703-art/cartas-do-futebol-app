@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const pools = require('./club-pools');
 assert.equal(Object.keys(pools.STATE_CLUBS).length, 27);
 for (const [uf, names] of Object.entries(pools.STATE_CLUBS)) {
-  assert(names.length >= 8, `${uf} needs enough named clubs for a roster`);
+  assert(names.length > 0, `${uf} must preserve the supplied named clubs; incomplete divisions are not padded with invented names`);
   assert.equal(new Set(names.map(x => pools.unique([x])[0].normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,''))).size, names.length, `${uf} has duplicate names`);
   assert(!names.some(x => /clube fictício|clube ficticio/i.test(x)), `${uf} has generic placeholder`);
 }
