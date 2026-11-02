@@ -1,0 +1,70 @@
+{
+  "jurisdiction": "São Paulo",
+  "competition": "Segunda Divisão Sub-23/Bezinha",
+  "season": 2026,
+  "expectedClubs": 24,
+  "status": "complete-user-supplied-roster",
+  "groups": {
+    "1": [
+      "América-SP",
+      "Assisense",
+      "José Bonifácio",
+      "Riopretano",
+      "Santa Fé",
+      "Tupã"
+    ],
+    "2": [
+      "Santacruzense",
+      "Grêmio Catanduvense",
+      "Independente de Limeira",
+      "Mogi Mirim",
+      "São Carlos",
+      "Matonense"
+    ],
+    "3": [
+      "Flamengo de Guarulhos",
+      "Guarulhos",
+      "Osasco Audax",
+      "Paulínia",
+      "Sporting Club Paulinense",
+      "Votoraty"
+    ],
+    "4": [
+      "Manthiqueira",
+      "Barcelona Capela",
+      "Grêmio Mauaense",
+      "Itaquaquecetuba (IAC)",
+      "Mauá",
+      "União Mogi"
+    ]
+  },
+  "missing": {},
+  "phase1": {
+    "format": "double-round-robin",
+    "matchesPerClub": 10,
+    "qualifiersPerGroup": 4
+  },
+  "knockout": {
+    "roundOf16": {
+      "tie": "aggregate-penalties"
+    },
+    "quarterfinals": {
+      "legs": "unspecified",
+      "tie": "unspecified"
+    },
+    "semifinals": {
+      "legs": "unspecified",
+      "tie": "unspecified"
+    },
+    "final": {
+      "legs": "unspecified",
+      "tie": "unspecified",
+      "winner": "champion"
+    },
+    "promotedFinalists": 2,
+    "promotionDestination": "A4",
+    "promotionSeason": 2027
+  },
+  "champion": null,
+  "runnerUp": null
+}

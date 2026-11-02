@@ -1,5 +1,5 @@
 {
-    "jurisdiction": "Brasil",
+  "jurisdiction": "Brasil",
   "season": 2026,
   "knownStateRules": {
     "general": {
@@ -15,6 +15,122 @@
     "pernambuco": {
       "2026": "A1 com oito clubes listados.",
       "2026/27": "Novo formato unificado de 24 clubes conforme informado; participantes e regulamento detalhado não fornecidos."
+    },
+    "saoPaulo": {
+      "season": 2026,
+      "divisions": {
+        "A1": {
+          "clubs": 16,
+          "phase1": "8 matches per club, no groups",
+          "phase1OpponentPots": "3 from own pot and 5 from other pots; pot assignments not supplied",
+          "qualifiers": 8,
+          "quarterfinals": {
+            "matches": 1,
+            "tie": "penalties"
+          },
+          "semifinals": {
+            "matches": 1,
+            "tie": "penalties"
+          },
+          "final": {
+            "legs": 2,
+            "tie": "aggregate penalties"
+          },
+          "relegated": 2,
+          "destination": "A2"
+        },
+        "A2": {
+          "clubs": 16,
+          "phase1": "single round robin",
+          "qualifiers": 8,
+          "groups": {
+            "A": [
+              1,
+              3,
+              6,
+              8
+            ],
+            "B": [
+              2,
+              4,
+              5,
+              7
+            ]
+          },
+          "groupLegs": 2,
+          "groupQualifiers": 2,
+          "semifinals": {
+            "legs": 2,
+            "tie": "best campaign"
+          },
+          "promoted": 2,
+          "final": {
+            "purpose": "champion",
+            "tie": "unspecified"
+          },
+          "relegated": 2,
+          "destination": "A3"
+        },
+        "A3": {
+          "clubs": 16,
+          "phase1": "single round robin",
+          "qualifiers": 8,
+          "quarterfinals": {
+            "legs": 2,
+            "tie": "penalties"
+          },
+          "semifinals": {
+            "legs": 2,
+            "tie": "penalties"
+          },
+          "final": {
+            "legs": 2,
+            "tie": "penalties"
+          },
+          "promoted": 2,
+          "relegated": 2,
+          "destination": "A4"
+        },
+        "A4": {
+          "clubs": 16,
+          "phase1": "single round robin",
+          "qualifiers": 8,
+          "quarterfinals": {
+            "legs": 2,
+            "tie": "best campaign"
+          },
+          "semifinals": {
+            "legs": 2,
+            "tie": "best campaign"
+          },
+          "final": {
+            "legs": 2,
+            "tie": "best campaign"
+          },
+          "promoted": 2,
+          "relegated": 2,
+          "destination": "Segunda Divisão Sub-23/Bezinha"
+        },
+        "Bezinha": {
+          "clubs": 24,
+          "groups": 4,
+          "clubsPerGroup": 6,
+          "phase1": "double round-robin",
+          "matchesPerClub": 10,
+          "qualifiersPerGroup": 4,
+          "roundOf16": "knockout; aggregate tie resolves on penalties",
+          "quarterfinals": "knockout; number of legs and tie-break unspecified",
+          "semifinals": "knockout; number of legs and tie-break unspecified",
+          "final": "winner is champion; number of legs and tie-break unspecified",
+          "promotedFinalists": 2,
+          "promotionDestination": "A4",
+          "promotionSeason": 2027,
+          "rosterFile": "brazil-2026-bezinha-groups.json",
+          "rosterStatus": "complete-user-supplied-roster"
+        }
+      },
+      "mechanicsOnly": true,
+      "noRuleProseInUi": true
     }
   },
   "national": {
@@ -94,8 +210,23 @@
       "engineStatus": "The current match engine remains an older 8×15 format; therefore it is not represented as an exact Série D 2026 season.",
       "qualificationRules": {
         "status": "user-supplied rules; annual CBF criteria may change",
-        "stateLeagueSlots": {"SP":4,"RJ":3,"MG":3,"RS":3,"PR":3,"CE":3,"GO":3,"SC":3,"BA":3,"allOtherStatesAndDF":2},
-        "additionalPossiblePaths": ["relegated Série C clubs","previous-season Série D performance under that edition's rules","CBF national ranking"],
+        "stateLeagueSlots": {
+          "SP": 4,
+          "RJ": 3,
+          "MG": 3,
+          "RS": 3,
+          "PR": 3,
+          "CE": 3,
+          "GO": 3,
+          "SC": 3,
+          "BA": 3,
+          "allOtherStatesAndDF": 2
+        },
+        "additionalPossiblePaths": [
+          "relegated Série C clubs",
+          "previous-season Série D performance under that edition's rules",
+          "CBF national ranking"
+        ],
         "annualChangeNotice": "CBF may change annual quotas and qualification criteria; use the lists and rules supplied for each season.",
         "knownInconsistency": {
           "issue": "The earlier supplied Série C 2026 rule says the bottom two clubs are relegated to Série D, while the later supplied Série D qualification rule says the four last Série C clubs are relegated.",
