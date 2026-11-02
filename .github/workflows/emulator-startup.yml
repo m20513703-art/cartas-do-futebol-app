@@ -1,0 +1,88 @@
+name: Android emulator startup validation
+on:
+  workflow_dispatch:
+  push:
+    branches: [validacao-campeonatos-v135]
+permissions:
+  contents: read
+jobs:
+  emulator-startup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: validacao-campeonatos-v135
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install dependencies and run regression tests
+        run: |
+          npm install --no-audit --no-fund
+          npm run test:engines
+      - name: Build production release APK
+        run: |
+          npx expo export --platform android --output-dir dist
+          npx expo prebuild --platform android --no-install
+          cd android && ./gradlew assembleRelease
+      - name: Verify APK
+        run: |
+          APK=android/app/build/outputs/apk/release/app-release.apk
+          test -s "$APK"
+          $ANDROID_HOME/build-tools/35.0.0/apksigner verify --verbose "$APK"
+          $ANDROID_HOME/build-tools/35.0.0/aapt dump badging "$APK" | head -5
+      - name: Boot emulator, install and launch production APK
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_2
+          disable-animations: true
+          script: |
+            set -euxo pipefail
+            APK="$GITHUB_WORKSPACE/android/app/build/outputs/apk/release/app-release.apk"
+            PKG=com.mmsistemastecnologia.cartasfutebol
+            adb wait-for-device
+            adb shell getprop sys.boot_completed | grep -q 1
+            adb logcat -c
+            adb install -r "$APK"
+            adb shell monkey -p "$PKG" -c android.intent.category.LAUNCHER 1
+            PID=''
+            for i in $(seq 1 60); do
+              PID=$(adb shell pidof "$PKG" | tr -d '\r' || true)
+              if [ -n "$PID" ]; then break; fi
+              sleep 1
+            done
+            test -n "$PID"
+            sleep 15
+            adb shell pidof "$PKG" | tee emulator-pid.txt
+            adb shell dumpsys activity activities > emulator-activities.txt
+            adb shell uiautomator dump /sdcard/window.xml >/dev/null
+            adb pull /sdcard/window.xml emulator-ui.xml
+            adb shell screencap -p /sdcard/screen.png
+            adb pull /sdcard/screen.png emulator-screen.png
+            adb logcat -d -v threadtime > emulator-logcat.txt
+            if grep -E 'FATAL EXCEPTION|Fatal signal|ReactNativeJS.*(Error|error)|Unable to load script' emulator-logcat.txt; then
+              echo 'Fatal/native or React Native JS error detected' >&2
+              exit 1
+            fi
+            test -s emulator-ui.xml
+            test -s emulator-screen.png
+            grep -q 'com.mmsistemastecnologia.cartasfutebol' emulator-activities.txt
+      - name: Upload emulator evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: emulator-startup-evidence
+          path: |
+            emulator-pid.txt
+            emulator-activities.txt
+            emulator-ui.xml
+            emulator-screen.png
+            emulator-logcat.txt
+            android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: warn
