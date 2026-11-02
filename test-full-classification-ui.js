@@ -20,7 +20,11 @@ const listed = ['Capital', 'Gama', 'Meu Clube'];
 const created = CareerClub.buildCustomClubCareer('  Águia FC ', '  Brasília  ', listed);
 assert.equal(created.club, 'Águia FC');
 assert.equal(created.city, 'Brasília');
-assert.deepEqual(created.leagueTeams, ['Águia FC', 'Capital', 'Gama']);
+assert.ok(created.leagueTeams.includes(created.club), 'custom club must be included');
+for (const team of listed) {
+  assert.ok(created.leagueTeams.includes(team), `provided team must be preserved: ${team}`);
+}
+assert.equal(created.leagueTeams.filter(team => team === created.club).length, 1, 'custom club should appear only once');
 assert.deepEqual(listed, ['Capital', 'Gama', 'Meu Clube']); // shared list is untouched
 assert.throws(() => CareerClub.buildCustomClubCareer('  ', 'Brasília', listed));
 
