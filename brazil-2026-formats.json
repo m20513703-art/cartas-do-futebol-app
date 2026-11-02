@@ -1,5 +1,5 @@
 {
-  "jurisdiction": "Brasil",
+    "jurisdiction": "Brasil",
   "season": 2026,
   "knownStateRules": {
     "general": {
@@ -22,74 +22,46 @@
       "season": 2026,
       "entrants": 126,
       "entrantListFile": "brazil-2026-copa-brasil-entrants.json",
-      "entrantListStatus": "The user-supplied named list is preserved as the initial 2026 entrants; it contains exactly 126 unique clubs. This submitted list is not silently reconciled with the later proposed eligibility formula.",
-      "eligibilityFormulaLatestSupplied": {
-        "calculation": "3 eligible per UF × 27 federative units (26 states + Federal District) + Série A 20 + Série B 20 + state-cup champions 5 = 126",
-        "unitExplanation": "The user used '27 states' colloquially; Brazil has 26 states plus the Federal District, totaling 27 federative units/UFs.",
-        "submittedListVsFormula": "The supplied 126-name list remains the initial 2026 participant roster. Some federation subtotals differ from three each; the later formula is an eligibility rule, not a replacement roster. Keep the discrepancy explicit; do not add/delete clubs to force a match.",
-        "inconsistency": "This formula's eligibility quotas/categories may not match the already supplied 126 named entrants. Preserve the submitted named list; do not replace participants without clarification.",
-        "cupChampionSlotCompetitions": [
-          "Copa Paulista",
-          "Copa Rio",
-          "Copa FGF",
-          "Copa Santa Catarina",
-          "Copa do Nordeste"
-        ],
-        "cupChampionSlotClarification": "The user confirmed these are five competitions. Copa do Nordeste's six listed clubs are the eligible entrants to that competition, not six qualification slots; no ambiguity remains about the five competitions."
-      },
-      "selectedFormatPerLatestUserCorrection": "Retain previous rules, not the newer seven-phase/two-leg proposal.",
-      "retainedPreviousFormat": {
-        "phaseCount": 9,
-        "phase5": "Round of 32",
-        "final": "Single match on December 6 (previously specified)",
-        "knockoutAndTieRules": "Retain prior supplied knockout/tie rules; newer proposal is superseded."
-      },
-      "supersededProposal": {
-        "phaseCount": 7,
-        "phases": [
-          "R1",
-          "R2",
-          "R3",
-          "R16",
-          "Quarterfinals",
-          "Semifinals",
-          "Final"
-        ],
-        "final": "Two-legged",
-        "status": "Rejected by latest user correction; keep previous rules."
+      "entrantListStatus": "The 2026 user-supplied roster is preserved verbatim, including any duplicate-name/data-quality issue; do not deduplicate, add, remove, or rename entrants to force a unique count.",
+      "entrantListDataQuality": {
+        "status": "Pending verification if exact supplied roster has duplicate names or not 126 unique names. Preserve every entry as supplied; do not deduplicate or invent replacements.",
+        "sourceFile": "brazil-2026-copa-brasil-entrants.json"
       },
       "entrantCountValidation": {
         "expectedNamedEntrants": 126,
         "actualNamedEntrants": 126,
-        "actualUniqueNamedEntrants": 126,
-        "eligibilityFormulaArithmetic": "3 × 27 + 20 + 20 + 5 = 126",
-        "participantListFormulaMatch": "The supplied names remain the initial 2026 list and are not force-reconciled to the eligibility formula; federation subtotals differ from a strict three-per-UF allocation."
+        "status": "Preserve the 126 supplied entries exactly as received. Any discrepancy in unique names is pending data-quality verification; do not reconcile by changing the roster."
       },
-      "stateCupChampionSlotCompetitions": {
-        "competitions": [
-          "Copa Paulista",
-          "Copa Rio",
-          "Copa FGF",
-          "Copa Santa Catarina",
-          "Copa do Nordeste"
-        ],
-        "competitionCount": 5,
-        "CopaDoNordesteEligibleClubs": 6,
-        "clarification": "Copa do Nordeste is one of the five competitions; its six clubs are competition entrants, not six slots."
+      "eligibilityFormulaLatestSupplied": {
+        "status": "Historical rule only; superseded for determining entrants by the later 126-name user-supplied list and latest R1–R9 rule. Never generate future participants from this formula.",
+        "priorFormula": "3 eligible per UF × 27 federative units + Série A 20 + Série B 20 + state-cup champions 5 = 126"
       },
-      "awards": "Financial prize per phase, trophy and medals; prize amounts not supplied.",
-      "finalSelectedByLatestUserCorrection": "Single match on December 6; do not use newer two-leg proposal.",
-      "libertadoresLatestRule": "Retain previous instruction: champion qualifies for group stage and runner-up for preliminary round; newer champion-only proposal superseded.",
-      "formatRevisionNotes": [
-        "Latest correction: retain prior nine phases, including fifth phase/round of 32, previous knockout/tie rules, and single-match final; do not use newer seven-phase/two-leg proposal."
-      ],
+      "selectedFormatPerLatestUserCorrection": "Use exactly the latest user-supplied R1–R9 rules below. Earlier conflicting proposals and qualification rules are superseded. The 2026 entrant list remains the user-supplied list.",
+      "phaseCount": 9,
+      "phaseRulesLatestUserCorrection": {
+        "R1": "28 one-match entrants -> 14 advance.",
+        "R2": "14 R1 qualifiers + 50 entrants = 64 -> 32 advance.",
+        "R3": "32 R2 qualifiers + 20 Série B entrants = 52 -> 26 advance.",
+        "R4": "26 qualifiers play; 13 advance; user literal says “only the two worst-qualified play each other to produce 12 qualifiers”. This is arithmetically ambiguous; the mechanic is unresolved. Do not invent how to select or play this bracket.",
+        "R5": "12 qualifiers + 20 Série A entrants.",
+        "R6": "Selects 16 qualifiers.",
+        "R7": "Selects 8 qualifiers.",
+        "R8": "Selects 4 qualifiers.",
+        "R9": "Final."
+      },
+      "R4MechanicStatus": "Unresolved: retain user literal exactly. It is arithmetically ambiguous; do not invent a selection or bracket mechanic.",
+      "futureSeasonEntrants": "The user supplies participant lists for each new season. Do not generate, infer, roll forward, or substitute future entrants automatically.",
+      "finalSelectedByLatestUserCorrection": "R9 final. No additional date or match-leg details are specified by the latest rule.",
       "libertadoresQualification": {
-        "retainedRule": "Champion to group stage; runner-up to preliminary round.",
-        "supersededProposal": "Only champion qualifies.",
-        "status": "Latest user correction says retain the previous rules, not the newer proposal."
+        "retainedRule": "Champion direct Libertadores; vice pre-Libertadores.",
+        "status": "Latest user-supplied rule."
       },
-      "prizes": "Financial prize by phase, trophy and medals; no prize amounts supplied.",
-      "roundCountPreviousSelectedByUser": 9
+      "formatRevisionNotes": [
+        "Latest exact user-supplied Copa do Brasil format is R1–R9, recorded in phaseRulesLatestUserCorrection.",
+        "R4 mechanic remains unresolved; no bracket or selection mechanism may be invented.",
+        "Future season participants must come only from user-provided lists."
+      ],
+      "awards": "Financial prize per phase, trophy and medals; prize amounts not supplied."
     },
     "Série A": {
       "clubs": 20,
@@ -122,23 +94,8 @@
       "engineStatus": "The current match engine remains an older 8×15 format; therefore it is not represented as an exact Série D 2026 season.",
       "qualificationRules": {
         "status": "user-supplied rules; annual CBF criteria may change",
-        "stateLeagueSlots": {
-          "SP": 4,
-          "RJ": 3,
-          "MG": 3,
-          "RS": 3,
-          "PR": 3,
-          "CE": 3,
-          "GO": 3,
-          "SC": 3,
-          "BA": 3,
-          "allOtherStatesAndDF": 2
-        },
-        "additionalPossiblePaths": [
-          "relegated Série C clubs",
-          "previous-season Série D performance under that edition's rules",
-          "CBF national ranking"
-        ],
+        "stateLeagueSlots": {"SP":4,"RJ":3,"MG":3,"RS":3,"PR":3,"CE":3,"GO":3,"SC":3,"BA":3,"allOtherStatesAndDF":2},
+        "additionalPossiblePaths": ["relegated Série C clubs","previous-season Série D performance under that edition's rules","CBF national ranking"],
         "annualChangeNotice": "CBF may change annual quotas and qualification criteria; use the lists and rules supplied for each season.",
         "knownInconsistency": {
           "issue": "The earlier supplied Série C 2026 rule says the bottom two clubs are relegated to Série D, while the later supplied Série D qualification rule says the four last Série C clubs are relegated.",
