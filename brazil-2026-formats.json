@@ -4,7 +4,8 @@
   "knownStateRules": {
     "general": {
       "promotionRelegation": "Dois sobem e dois caem nos estaduais quando a competição tiver divisão de acesso; a lista/regra deve respeitar a informação fornecida para cada federação. Não fornecida = desconhecida.",
-      "incompleteData": "Listas e formatos estaduais não enviados permanecem marcados como não fornecidos; não completar com clubes inventados."
+      "incompleteData": "Listas e formatos estaduais não enviados permanecem marcados como não fornecidos; não completar com clubes inventados.",
+      "futureSeasons": "The user supplies participant lists for each new season; do not invent clubs or future entrants."
     },
     "df": {
       "competition": "1ª Divisão do Distrito Federal",
@@ -45,7 +46,33 @@
       "totalClubs": 96,
       "userProvidedGroupData": "16 groups × 6 clubs are stored in brazil-2026-series-d-groups.json as supplied.",
       "format": "The 2026 group lists supplied by the user have been preserved; detailed group-stage advancement and finals rules were not available in the recorded context.",
-      "engineStatus": "The current match engine remains an older 8×15 format; therefore it is not represented as an exact Série D 2026 season."
+      "engineStatus": "The current match engine remains an older 8×15 format; therefore it is not represented as an exact Série D 2026 season.",
+      "qualificationRules": {
+        "status": "user-supplied rules; annual CBF criteria may change",
+        "stateLeagueSlots": {
+          "SP": 4,
+          "RJ": 3,
+          "MG": 3,
+          "RS": 3,
+          "PR": 3,
+          "CE": 3,
+          "GO": 3,
+          "SC": 3,
+          "BA": 3,
+          "allOtherStatesAndDF": 2
+        },
+        "additionalPossiblePaths": [
+          "relegated Série C clubs",
+          "previous-season Série D performance under that edition's rules",
+          "CBF national ranking"
+        ],
+        "annualChangeNotice": "CBF may change annual quotas and qualification criteria; use the lists and rules supplied for each season.",
+        "knownInconsistency": {
+          "issue": "The earlier supplied Série C 2026 rule says the bottom two clubs are relegated to Série D, while the later supplied Série D qualification rule says the four last Série C clubs are relegated.",
+          "status": "Pending clarification. Do not silently choose or implement a relegation count."
+        },
+        "futureSeasons": "The user will supply participant lists for each new season. Never invent future entrants; accept only user-supplied lists."
+      }
     }
   },
   "unknowns": [
@@ -53,7 +80,7 @@
     "Clubes restantes e participantes estaduais não informados.",
     "Regras de classificação continentais detalhadas dependem das vagas fornecidas, sem completar grupos ausentes.",
     "Listas completas de Série D e grupos foram citadas como entregues, mas o registro disponível contém somente os 16 grupos parcialmente enumerados abaixo.",
-    "The 2026 Série D UI/match engine is not yet connected to the exact 16×6 group list; stored group data remains transparent reference data.",
-    "The 2026 Série D UI/match engine is not yet connected to the exact 16×6 group list; stored group data remains transparent reference data."
+    "Série C relegation count remains inconsistent in the supplied rules: earlier Série C data says two relegated, newer Série D rule says four; pending clarification.",
+    "Future-season participant lists must be supplied by the user; do not generate participants."
   ]
 }
