@@ -1,0 +1,30 @@
+name: Publicar APK de teste Futebol Top
+on:
+  push:
+    branches: [validacao-campeonatos-v135]
+    paths: ['.github/workflows/release-teste-futebol.yml']
+permissions:
+  contents: write
+  actions: read
+jobs:
+  release-teste:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar APK da validação aprovada
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api -H 'Accept: application/vnd.github+json' /repos/${{ github.repository }}/actions/artifacts/13245405766/zip > evidence.zip
+          unzip -j evidence.zip 'android/app/build/outputs/apk/release/app-release.apk' -d .
+          mv app-release.apk Futebol-Top-versao-de-teste.apk
+          test -s Futebol-Top-versao-de-teste.apk
+      - name: Publicar pré-lançamento isolado
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create 'validacao-sem-copa-paulista-b4db5dd-20261103' Futebol-Top-versao-de-teste.apk \
+            --repo "${{ github.repository }}" --target 'b4db5dd3d7d3ad4828864b80390b3b615fd3e818' --prerelease \
+            --title 'Futebol Top — versão de teste Android' \
+            --notes 'Versão isolada de teste. A Copa Paulista foi removida da carreira de São Paulo; a liga estadual continua. Regressões, build e assinatura do APK, abertura em emulador e migração de carreira com backup foram verificados. A partida não foi testada até 90 minutos; a Copa Paulista não faz mais parte deste teste. A versão oficial anterior e os salvamentos de sua edição foram preservados.'
