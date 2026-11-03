@@ -1,0 +1,30 @@
+name: Publicar APK de teste Futebol Top
+on:
+  push:
+    branches: [validacao-campeonatos-v135]
+    paths: ['.github/workflows/release-teste-futebol.yml']
+permissions:
+  contents: write
+  actions: read
+jobs:
+  release-teste:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar APK da validação aprovada
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api -H 'Accept: application/vnd.github+json' /repos/${{ github.repository }}/actions/artifacts/13217037164/zip > evidence.zip
+          unzip -j evidence.zip 'android/app/build/outputs/apk/release/app-release.apk' -d .
+          mv app-release.apk Futebol-Top-versao-de-teste.apk
+          test -s Futebol-Top-versao-de-teste.apk
+      - name: Publicar pré-lançamento isolado
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create 'validacao-cb0bf30-20261103' Futebol-Top-versao-de-teste.apk \
+            --repo "${{ github.repository }}" --target 'cb0bf30d684982ff7c0027f4786a5c08b84eaef9' --prerelease \
+            --title 'Futebol Top — versão de teste Android' \
+            --notes 'Versão de teste separada, não definitiva. O APK foi compilado, teve a assinatura verificada e abriu em emulador. A Copa Paulista ainda não foi refeita; o fechamento aos 89 minutos e uma carreira completa ainda não foram testados. A versão publicada anterior e seus salvamentos não foram alterados.'
