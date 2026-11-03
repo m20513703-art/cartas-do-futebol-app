@@ -7,12 +7,13 @@ const cups = require('./copas');
 const CareerClub = require('./career-club');
 const Brazil2026 = require('./brazil-2026-data');
 
-// Confirm the tab has its own conditional and the competition panels render separately.
+// Confirm the current-league table and the independent competition tables/brackets render in their own areas.
 assert.match(app, /tab==='Classificação'&&/);
 assert.match(app, /game\.league\.teams\.map\(\(r,i\)=>/);
 assert.match(app, /Object\.entries\(game\.tournaments\|\|\{\}\)\.filter/);
 assert.match(app, /item\.kind==='cba'&&<>[\s\S]*?info\.summary\.table\|\|\[\]/);
-assert.match(app, /item\.kind==='serieD'&&Object\.entries\(info\.summary\.groups\|\|\{\}\)\.map/);
+assert.match(app, /Fase de grupos · classificação por grupos da própria Série D/);
+assert.match(app, /classificationOpen\[key\]&&Object\.entries\(info\.summary\.groups\|\|\{\}\)\.map/);
 assert.match(app, /item\.kind==='cup'&&[\s\S]{0,200}?item\.state\.rounds\|\|\[\]/);
 assert.doesNotMatch(app, /item\.kind==='cup'[\s\S]{0,300}?info\.summary\.table/);
 assert.match(app, /VER CLASSIFICAÇÃO COMPLETA/);
