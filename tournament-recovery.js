@@ -2,12 +2,14 @@
 const SerieD=require('./serie-d');
 const SeriesCBA=require('./series-cba');
 const Copas=require('./copas');
+const CopaPaulista=require('./copa-paulista-2026');
 function usable(item,key,club){
  if(!item||typeof item!=='object'||!item.state)return false;
  const state=item.state;
  try {
   if(key==='serieD')return item.kind==='serieD'&&state.version===1&&Array.isArray(state.clubs)&&state.clubs.length===120&&Array.isArray(state.fixtures)&&Array.isArray(state.groups)&&state.groups.length===8&&['groups','knockout'].includes(state.phase)&&!!SerieD.summarize(state,club);
   if(['C','B','A'].includes(key))return item.kind==='cba'&&state.version===1&&state.division===key&&state.divisionName===`Série ${key}`&&Array.isArray(state.teams)&&state.teams.length===20&&Array.isArray(state.rounds)&&state.rounds.length>0&&state.table&&['league','playoff','complete'].includes(state.stage)&&!!SeriesCBA.summarize(state,club);
+  if(key==='estadual'&&state.type==='copaPaulista'&&state.schema==='copa-paulista-fpf-2026-v1')return item.kind==='cup'&&Array.isArray(state.rounds)&&!!CopaPaulista.summarize(state,club);
   const expected={copaBrasil:'copaBrasil',libertadores:'libertadores',sulAmericana:'sulAmericana'}[key];
   const cupOk=key==='estadual'?['estadual','copaPaulista','copaRio'].includes(state.type):state.type===expected;
   return item.kind==='cup'&&state.schema==='futebol-top-cup-v1'&&cupOk&&Array.isArray(state.rounds)&&state.rounds.length>0&&Array.isArray(state.rounds[state.rounds.length-1].matches)&&!!Copas.summarize(state,club);
