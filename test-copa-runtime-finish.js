@@ -1,0 +1,14 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const src=fs.readFileSync('App.js','utf8');
+assert.match(src,/if\(!matchLive\|\|pause\|\|minute>=90\)return/);
+assert.match(src,/if\(m>=90\)\{ML\(false\);PA\(false\);finishMatch\(scoreRef\.current\.home,scoreRef\.current\.away\)\}/);
+assert.match(src,/activeTournamentMatchIdRef\.current=m\.id/);
+assert.match(src,/pending\.id!==activeTournamentMatchIdRef\.current/);
+assert.match(src,/item\.state\.type==='copaPaulista'/);
+assert.match(src,/Copa Paulista: finalização ignorada/);
+assert.match(src,/Copa Paulista: falha ao fechar a partida; carreira preservada/);
+assert.match(src,/if\(matchFinalizedRef\.current\)return/);
+assert.match(src,/function startTournamentGame\(key\)\{matchFinalizedRef\.current=false;activeTournamentMatchIdRef\.current=null/);
+console.log('Copa Paulista minute-90 single-finalization guards present.');
