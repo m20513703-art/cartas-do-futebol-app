@@ -1,0 +1,442 @@
+{
+  "source": "Listas e regulamentos enviados por Mateus no chat; preservados sem normalização",
+  "libertadores": {
+    "competition": "Copa Libertadores da América",
+    "season": 2026,
+    "reported_total_clubs": 47,
+    "countries": 10,
+    "preliminary_phase_1": [
+      {
+        "club": "The Strongest",
+        "country": "Bolivia"
+      },
+      {
+        "club": "Deportivo Táchira",
+        "country": "Venezuela"
+      },
+      {
+        "club": "Juventud",
+        "country": "Uruguay"
+      },
+      {
+        "club": "Universidad Católica",
+        "country": "Equador"
+      },
+      {
+        "club": "2 de Mayo",
+        "country": "Paraguai"
+      },
+      {
+        "club": "Alianza Lima",
+        "country": "Peru"
+      }
+    ],
+    "preliminary_phase_1_rules": [
+      "6 times",
+      "3 confrontos eliminatórios",
+      "ida e volta",
+      "3 classificados para a segunda fase"
+    ],
+    "preliminary_phase_2_direct_entrants": [
+      {
+        "club": "Botafogo",
+        "country": "Brasil"
+      },
+      {
+        "club": "Bahia",
+        "country": "Brasil"
+      },
+      {
+        "club": "Sporting Cristal",
+        "country": "Peru"
+      },
+      {
+        "club": "Guaraní",
+        "country": "Paraguai"
+      },
+      {
+        "club": "Independiente Medellín",
+        "country": "Colômbia"
+      },
+      {
+        "club": "Argentinos Juniors",
+        "country": "Argentina"
+      },
+      {
+        "club": "Deportes Tolima",
+        "country": "Colômbia"
+      },
+      {
+        "club": "Huachipato",
+        "country": "Chile"
+      },
+      {
+        "club": "Barcelona de Guayaquil",
+        "country": "Equador"
+      },
+      {
+        "club": "Liverpool",
+        "country": "Uruguai"
+      },
+      {
+        "club": "Nacional Potosí",
+        "country": "Bolívia"
+      },
+      {
+        "club": "Carabobo",
+        "country": "Venezuela"
+      },
+      {
+        "club": "O'Higgins",
+        "country": "Chile"
+      }
+    ],
+    "preliminary_phase_2_qualifier_slots": 3,
+    "preliminary_phase_2_rules": [
+      "16 times: 13 entradas diretas + 3 classificados da primeira fase",
+      "8 confrontos",
+      "ida e volta",
+      "8 classificados para a terceira fase"
+    ],
+    "preliminary_phase_3_rules": [
+      "8 equipes classificadas da segunda fase",
+      "4 confrontos",
+      "ida e volta",
+      "4 vencedores avançam à fase de grupos",
+      "4 eliminados vão para a fase de grupos da Sul-Americana"
+    ],
+    "group_stage_direct_entrants_by_country": {
+      "Argentina": [
+        "Boca Juniors",
+        "Estudiantes",
+        "Independiente Rivadavia",
+        "Lanús",
+        "Rosario Central",
+        "Platense"
+      ],
+      "Bolívia": [
+        "Always Ready",
+        "Bolívar"
+      ],
+      "Brasil": [
+        "Flamengo",
+        "Palmeiras",
+        "Fluminense",
+        "Corinthians",
+        "Cruzeiro",
+        "Mirassol"
+      ],
+      "Chile": [
+        "Coquimbo Unido",
+        "Universidad Católica"
+      ],
+      "Colômbia": [
+        "Junior Barranquilla",
+        "Independiente Santa Fe"
+      ],
+      "Equador": [
+        "LDU Quito",
+        "Independiente del Valle"
+      ],
+      "Paraguai": [
+        "Cerro Porteño",
+        "Libertad"
+      ],
+      "Peru": [
+        "Cusco",
+        "Universitario"
+      ],
+      "Uruguai": [
+        "Nacional",
+        "Peñarol"
+      ],
+      "Venezuela": [
+        "Deportivo La Guaira",
+        "Universidad Central"
+      ]
+    },
+    "group_stage_qualifier_slots": 4,
+    "group_stage_rules": [
+      "32 times",
+      "8 grupos de 4",
+      "ida e volta",
+      "6 partidas por equipe",
+      "1º e 2º avançam às oitavas",
+      "3º vai aos playoffs da Sul-Americana",
+      "4º eliminado"
+    ],
+    "knockout_rules": {
+      "oitavas": "16 equipes; 8 confrontos; ida e volta; 8 classificados",
+      "quartas": "8 equipes; 4 confrontos; ida e volta; 4 classificados",
+      "semifinais": "4 equipes; 2 confrontos; ida e volta; 2 finalistas",
+      "final": "jogo único em campo neutro; prorrogação em caso de empate; pênaltis se persistir"
+    },
+    "general_rules": [
+      "10 países sul-americanos",
+      "preliminares eliminatórias",
+      "ida e volta decidida pelo agregado",
+      "empate no agregado decidido nos pênaltis",
+      "sem gol qualificado",
+      "campeão conquista a Copa Libertadores da América"
+    ],
+    "group_assignments": null,
+    "notes": [
+      "Os clubes da fase de grupos foram enviados por país, sem sorteio/distribuição em grupos A-H; não inventar grupos.",
+      "Os 3 classificados da fase 1 ocupam vagas da fase 2; não são entradas extras.",
+      "As 4 vagas da fase de grupos vindas da fase 3 são slots de classificados, não clubes adicionais."
+    ]
+  },
+  "sul_americana": {
+    "competition": "Copa Sul-Americana",
+    "season": 2026,
+    "reported_total_clubs": 44,
+    "countries": 10,
+    "preliminary_phase_by_country": {
+      "Bolívia": [
+        "San Antonio Bulo Bulo",
+        "Blooming",
+        "Independiente Petrolero",
+        "Guabirá"
+      ],
+      "Chile": [
+        "Universidad de Chile",
+        "Audax Italiano",
+        "Palestino",
+        "Cobresal"
+      ],
+      "Colômbia": [
+        "Atlético Nacional",
+        "América de Cali",
+        "Atlético Bucaramanga",
+        "Millonarios"
+      ],
+      "Equador": [
+        "Orense",
+        "Libertad",
+        "Macará",
+        "Deportivo Cuenca"
+      ],
+      "Paraguai": [
+        "Sportivo Trinidense",
+        "Nacional",
+        "Recoleta",
+        "Olimpia"
+      ],
+      "Peru": [
+        "Alianza Atlético",
+        "Melgar",
+        "Deportivo Garcilaso",
+        "Cienciano"
+      ],
+      "Uruguai": [
+        "Defensor Sporting",
+        "Boston River",
+        "Racing",
+        "Montevideo City Torque"
+      ],
+      "Venezuela": [
+        "Academia Puerto Cabello",
+        "Monagas",
+        "Caracas",
+        "Metropolitanos"
+      ]
+    },
+    "preliminary_rules": [
+      "32 equipes",
+      "16 confrontos nacionais",
+      "4 representantes por país",
+      "jogo único",
+      "2 vencedores por país avançam à fase de grupos",
+      "16 classificados"
+    ],
+    "groups": {
+      "A": [
+        {
+          "club": "América de Cali",
+          "country": "Colômbia"
+        },
+        {
+          "club": "Tigre",
+          "country": "Argentina"
+        },
+        {
+          "club": "Macará",
+          "country": "Equador"
+        },
+        {
+          "club": "Alianza Atlético",
+          "country": "Peru"
+        }
+      ],
+      "B": [
+        {
+          "club": "Atlético Mineiro",
+          "country": "Brasil"
+        },
+        {
+          "club": "Cienciano",
+          "country": "Peru"
+        },
+        {
+          "club": "Academia Puerto Cabello",
+          "country": "Venezuela"
+        },
+        {
+          "club": "Juventud",
+          "country": "Uruguai"
+        }
+      ],
+      "C": [
+        {
+          "club": "São Paulo",
+          "country": "Brasil"
+        },
+        {
+          "club": "Millonarios",
+          "country": "Colômbia"
+        },
+        {
+          "club": "Boston River",
+          "country": "Uruguai"
+        },
+        {
+          "club": "O'Higgins",
+          "country": "Chile"
+        }
+      ],
+      "D": [
+        {
+          "club": "Santos",
+          "country": "Brasil"
+        },
+        {
+          "club": "San Lorenzo",
+          "country": "Argentina"
+        },
+        {
+          "club": "Deportivo Cuenca",
+          "country": "Equador"
+        },
+        {
+          "club": "Recoleta",
+          "country": "Paraguai"
+        }
+      ],
+      "E": [
+        {
+          "club": "Racing",
+          "country": "Argentina"
+        },
+        {
+          "club": "Caracas",
+          "country": "Venezuela"
+        },
+        {
+          "club": "Independiente Petrolero",
+          "country": "Bolívia"
+        },
+        {
+          "club": "Botafogo",
+          "country": "Brasil"
+        }
+      ],
+      "F": [
+        {
+          "club": "Grêmio",
+          "country": "Brasil"
+        },
+        {
+          "club": "Palestino",
+          "country": "Chile"
+        },
+        {
+          "club": "Montevideo City Torque",
+          "country": "Uruguai"
+        },
+        {
+          "club": "Deportivo Riestra",
+          "country": "Argentina"
+        }
+      ],
+      "G": [
+        {
+          "club": "Olimpia",
+          "country": "Paraguai"
+        },
+        {
+          "club": "Vasco da Gama",
+          "country": "Brasil"
+        },
+        {
+          "club": "Audax Italiano",
+          "country": "Chile"
+        },
+        {
+          "club": "Barracas Central",
+          "country": "Argentina"
+        }
+      ],
+      "H": [
+        {
+          "club": "River Plate",
+          "country": "Argentina"
+        },
+        {
+          "club": "Red Bull Bragantino",
+          "country": "Brasil"
+        },
+        {
+          "club": "Blooming",
+          "country": "Bolívia"
+        },
+        {
+          "club": "Carabobo",
+          "country": "Venezuela"
+        }
+      ]
+    },
+    "group_stage_rules": [
+      "8 grupos de 4",
+      "ida e volta",
+      "6 partidas por equipe",
+      "1º avança diretamente às oitavas",
+      "2º disputa playoffs contra terceiros da Libertadores",
+      "3º e 4º eliminados"
+    ],
+    "playoffs_rules": [
+      "16 equipes",
+      "8 segundos colocados da Sul-Americana + 8 terceiros colocados da Libertadores",
+      "8 confrontos",
+      "ida e volta",
+      "8 vencedores avançam às oitavas"
+    ],
+    "knockout_rules": {
+      "oitavas": "16 equipes: 8 líderes de grupo + 8 vencedores dos playoffs; 8 confrontos; ida e volta",
+      "quartas": "8 equipes; 4 confrontos; ida e volta",
+      "semifinais": "4 equipes; 2 confrontos; ida e volta",
+      "final": "jogo único em campo neutro; prorrogação em caso de empate; pênaltis se persistir"
+    },
+    "general_rules": [
+      "10 países",
+      "16 vencedores da primeira fase + 16 entradas diretas compõem 32 vagas na fase de grupos",
+      "mata-mata, exceto final, em ida e volta",
+      "campeão conquista a Copa Sul-Americana"
+    ],
+    "count_audit": {
+      "preliminary_entrant_slots": 32,
+      "direct_group_entrant_slots_as_stated": 16,
+      "implied_total_entrant_slots": 48,
+      "reported_total": 44,
+      "group_stage_positions_named": 32,
+      "preliminary_named_clubs": 32,
+      "group_names_matching_preliminary_roster": 16,
+      "unique_named_club_identities_across_lists": 48,
+      "status": "Inconsistência mantida sem corrigir: 32 preliminares + 16 entradas diretas implicam 48 clubes, não 44. Não remover nem adicionar clubes sem autorização."
+    },
+    "notes": [
+      "Nomes de grupos e participantes foram registrados exatamente como enviados.",
+      "Racing da fase preliminar é o clube uruguaio; Racing do Grupo E é argentino; não são o mesmo clube.",
+      "O total informado de 44 conflita com as 48 vagas/nomenclaturas fornecidas; pedir esclarecimento antes de normalizar."
+    ]
+  }
+}
