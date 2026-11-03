@@ -7,20 +7,41 @@ const cups = require('./copas');
 const CareerClub = require('./career-club');
 const Brazil2026 = require('./brazil-2026-data');
 
-// Confirm the current-league table and the independent competition tables/brackets render in their own areas.
+// Current league table is separate from competition-specific tables/brackets.
 assert.match(app, /tab==='Classificação'&&/);
 assert.match(app, /game\.league\.teams\.map\(\(r,i\)=>/);
 assert.match(app, /Object\.entries\(game\.tournaments\|\|\{\}\)\.filter/);
 assert.match(app, /item\.kind==='cba'&&<>[\s\S]*?info\.summary\.table\|\|\[\]/);
 assert.match(app, /Fase de grupos · classificação por grupos da própria Série D/);
 assert.match(app, /classificationOpen\[key\]&&Object\.entries\(info\.summary\.groups\|\|\{\}\)\.map/);
-assert.match(app, /item\.kind==='cup'&&[\s\S]{0,200}?item\.state\.rounds\|\|\[\]/);
+assert.match(app, /classificationOpen\[key\]&&\(item\.state\.rounds\|\|\[\]\)\.map\(round=>/);
 assert.doesNotMatch(app, /item\.kind==='cup'[\s\S]{0,300}?info\.summary\.table/);
 assert.match(app, /VER CLASSIFICAÇÃO COMPLETA/);
 assert.match(app, /VER CHAVE E RESULTADOS/);
 assert.match(app, /classificationOpen\[key\]\?/);
 assert.match(app, /Nome do seu clube/);
 assert.doesNotMatch(app, /REGRAS DE CARREIRA \(SIMPLIFICADAS\)|TEMPORADA BRASILEIRA 2026|Outras competições/);
+
+// Creation uses all supplied state participants; Brasil's makeTeams is not truncated to eight.
+assert.match(app, /return ClubPools\.unique\(ordered\)\.slice\(0,country==='Brasil'\?ordered\.length:8\)/);
+assert.match(app, /let teams=makeTeams\('Brasil',state,div\)/);
+assert.match(app, /const leagueNames=customCareer\.leagueTeams;const league=\{name:div,division:div,teams:seasonTable\(leagueNames\),fixtures:createFixtures\(leagueNames\),round:1\}/);
+
+// Verify every supplied division's actual roster, and that creating the club adds only that club.
+let checkedDivisions = 0;
+for (const [uf, divisions] of Object.entries(Brazil2026.stateClubs)) {
+  for (const [division, supplied] of Object.entries(divisions)) {
+    const before = JSON.stringify(supplied);
+    const custom = `New Test Club ${uf} ${division}`;
+    const created = CareerClub.buildCustomClubCareer(custom, 'Cidade', supplied);
+    assert.equal(created.leagueTeams[0], custom);
+    assert.equal(created.leagueTeams.length, supplied.length + 1, `${uf}/${division}: no truncation or replacement`);
+    for (const team of supplied) assert.ok(created.leagueTeams.includes(team), `${uf}/${division}: preserve ${team}`);
+    assert.equal(JSON.stringify(supplied), before, `${uf}/${division}: preserve source list`);
+    checkedDivisions++;
+  }
+}
+assert.equal(checkedDivisions, 55, 'exercise all supplied state divisions');
 
 // A custom club is inserted without replacing or mutating the supplied opponent list.
 const listed = ['Capital', 'Gama', 'Meu Clube'];
@@ -53,4 +74,4 @@ assert.equal(Object.keys(groups).length, 8);
 for (const table of Object.values(groups)) assert.equal(table.length, 15);
 const cup = cups.create({type:'libertadores',club:'Meu Clube',teams:['Rival 1','Rival 2','Rival 3'],season:'2026'});
 assert.ok(cup.rounds.length > 0);
-console.log('Classification UI and state data regression tests passed');
+console.log(`Classification UI, state data and full-roster tests passed (${checkedDivisions} divisions).`);
