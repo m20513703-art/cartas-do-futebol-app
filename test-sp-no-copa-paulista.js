@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const src=fs.readFileSync('App.js','utf8');
+assert.doesNotMatch(src,/STATE_CUP_QUALIFICATION_RULES=\{SP:\{key:'copaPaulista'/,'São Paulo must not schedule Copa Paulista as its career cup');
+assert.match(src,/if\(key==='estadual'&&country==='Brasil'&&state==='SP'\)continue/,'São Paulo should not receive any state-cup slot in new seasons');
+assert.match(src,/footballCareerBrazil2026V1_copaPaulista_removed_backup_/,'legacy save is backed up before removal');
+assert.match(src,/delete tournaments\.estadual/,'legacy Copa Paulista entry is removed from active São Paulo save');
+assert.match(src,/if\(old\.state!=='SP'\)newg\.tournaments=/,'São Paulo rollover must not recreate a state-cup entry');
+assert.match(src,/const chosenClub=customClubName\.trim\(\)/,'career remains based on a newly created club');
+assert.match(src,/buildCustomClubCareer\(chosenClub,city,teams\)/,'created club begins in configured lowest available division');
+console.log('São Paulo Copa Paulista removed from new seasons and backed-up legacy São Paulo saves; created-club career retained.');

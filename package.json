@@ -6,10 +6,11 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "test:engines": "node test-serie-d.js && node test-series-cba.js && node test-copas.js && node test-progression-integration.js && node test-club-pools.js && node test-tournament-recovery.js && node test-brazil-2026-data.js && node test-brazil-2026-engines.js && node test-full-classification-ui.js && node test-paulista-rules.js && node test-paulista-data.js && node test-copa-paulista-2026.js && node test-career-created.js && node test-copa-runtime-finish.js",
+    "test:engines": "node test-serie-d.js && node test-series-cba.js && node test-copas.js && node test-progression-integration.js && node test-club-pools.js && node test-tournament-recovery.js && node test-brazil-2026-data.js && node test-brazil-2026-engines.js && node test-full-classification-ui.js && node test-paulista-rules.js && node test-paulista-data.js && node test-copa-paulista-2026.js && node test-career-created.js && node test-copa-runtime-finish.js && node test-sp-no-copa-paulista.js",
     "test:brazil-2026": "node test-brazil-2026-data.js",
     "test:copa-paulista": "node test-copa-paulista-2026.js",
-    "test:copa-runtime": "node test-copa-runtime-finish.js"
+    "test:copa-runtime": "node test-copa-runtime-finish.js",
+    "test:sp-no-paulista": "node test-sp-no-copa-paulista.js"
   },
   "dependencies": {
     "expo": "~54.0.0",
