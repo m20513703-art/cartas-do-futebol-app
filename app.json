@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "Futebol Top Brasil 2026",
-    "slug": "futebol-top-brasil-2026",
-    "version": "2.0.0",
+    "name": "Futebol Top · Modo Técnico (Teste)",
+    "slug": "futebol-top-modo-tecnico-teste",
+    "version": "2.1.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "icon": "./icon.png",
     "android": {
-      "package": "com.mmsistemastecnologia.futeboltopbrasil2026",
+      "package": "com.mmsistemastecnologia.futeboltop.managerpreview",
       "versionCode": 1,
       "edgeToEdgeEnabled": false,
       "adaptiveIcon": {
@@ -17,7 +17,7 @@
       }
     },
     "ios": {
-      "bundleIdentifier": "com.mmsistemastecnologia.futeboltopbrasil2026"
+      "bundleIdentifier": "com.mmsistemastecnologia.futeboltop.managerpreview"
     }
   }
 }
