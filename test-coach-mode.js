@@ -13,7 +13,7 @@ g=coach.swapStarter(g,3,22); assert(g.lineup.includes(22)); assert(!g.lineup.inc
 g=coach.substitute(g,4,3,{matchLive:true,paused:true}); assert.equal(g.subsUsed,1); assert(g.lineup.includes(3)); assert(!g.lineup.includes(4));
 assert.throws(()=>coach.substitute(g,5,9,{matchLive:true,pause:true}),/Pause/);
 assert.throws(()=>coach.substitute({...g,subsUsed:5},5,6,{matchLive:true,paused:true}),/Limite/);
-assert.throws(()=>coach.substitute(g,5,9,{matchLive:true,paused:true}),/mesma posição/);
+assert.throws(()=>coach.substitute(g,5,13,{matchLive:true,paused:true}),/mesma posição/);
 assert.throws(()=>coach.substitute(g,5,4,{matchLive:true,paused:true}),/não pode voltar/);
 const withMarket={...g,transferMarket:market,coins:1000}; const bought=coach.signPlayer(withMarket,market[0]);
 assert.equal(bought.coins,600); assert.equal(bought.players.length,24); assert.equal(bought.transferMarket.length,0);
