@@ -9,13 +9,13 @@ assert.equal(g.players.length,23); assert(g.players.every((p,i)=>p.id===i)); ass
 const reopened=coach.ensureManagerState(JSON.parse(JSON.stringify(g)),()=>[]); assert.equal(reopened.players.length,23); assert.deepEqual(reopened.lineup,g.lineup);
 const repaired=coach.ensureManagerState({players,coins:1000,lineup:['wrong',11,2,3,4,5,6,7,8,9,10]},()=>[]); assert(coach.validStartingXI(players,repaired.lineup));
 g=coach.startMatch({...g,subsUsed:3}); assert.equal(g.subsUsed,0);
-const halfGame=coach.ensureManagerState({players,coins:1000},()=>[]); const halfSub=coach.substitute(halfGame,3,5,{matchLive:false,paused:false,halftime:true}); assert.equal(halfSub.subsUsed,1); assert(halfSub.lineup.includes(5)); assert(!halfSub.lineup.includes(3));
+const halfGame=coach.ensureManagerState({players,coins:1000},()=>[]); const halfSub=coach.substitute(halfGame,3,22,{matchLive:false,paused:false,halftime:true}); assert.equal(halfSub.subsUsed,1); assert(halfSub.lineup.includes(22)); assert(!halfSub.lineup.includes(3));
 g=coach.swapStarter(g,3,22); assert(g.lineup.includes(22)); assert(!g.lineup.includes(3)); assert(coach.validStartingXI(g.players,g.lineup));
 g=coach.substitute(g,4,3,{matchLive:true,paused:true}); assert.equal(g.subsUsed,1); assert(g.lineup.includes(3)); assert(!g.lineup.includes(4));
-assert.throws(()=>coach.substitute(g,5,9,{matchLive:true,pause:true}),/Pause/);
-assert.throws(()=>coach.substitute({...g,subsUsed:5},5,6,{matchLive:true,paused:true}),/Limite/);
+assert.throws(()=>coach.substitute(g,5,19,{matchLive:true,pause:true}),/Pause/);
+assert.throws(()=>coach.substitute({...g,subsUsed:5},5,19,{matchLive:true,paused:true}),/Limite/);
 assert.throws(()=>coach.substitute(g,5,19,{matchLive:true,paused:true}),/mesma posição/);
-assert.throws(()=>coach.substitute(g,5,4,{matchLive:true,paused:true}),/não pode voltar/);
+assert.throws(()=>coach.substitute(g,3,4,{matchLive:true,paused:true}),/não pode voltar/);
 const withMarket={...g,transferMarket:market,coins:1000}; const bought=coach.signPlayer(withMarket,market[0]);
 assert.equal(bought.coins,600); assert.equal(bought.players.length,24); assert.equal(bought.transferMarket.length,0);
 assert.throws(()=>coach.signPlayer({...withMarket,coins:100},market[0]),/Saldo insuficiente/);
