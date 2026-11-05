@@ -2,7 +2,7 @@ name: Android validation APK
 on:
   workflow_dispatch:
   push:
-    branches: [main, validacao-campeonatos-v135]
+    branches: [main, validacao-campeonatos-v135, prototipo-modo-tecnico]
 permissions:
   contents: read
 jobs:
@@ -41,6 +41,6 @@ jobs:
       - name: Store validation artifact (no release from this branch)
         uses: actions/upload-artifact@v4
         with:
-          name: futebol-top-v1.3.6-recovery-validation
+          name: futebol-top-manager-preview-isolated
           path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
