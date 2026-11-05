@@ -93,8 +93,8 @@ for n in r.iter('node'):
 PYUI
 mapfile -t fields < /tmp/futbol-fields.txt
 test "${#fields[@]}" -ge 2
-read -r x y <<< "${fields[0]}"; adb shell input tap "$x" "$y"; adb shell input text 'FutTopTeste'; adb shell input keyevent 4
-read -r x y <<< "${fields[1]}"; adb shell input tap "$x" "$y"; adb shell input text 'SaoPaulo'; adb shell input keyevent 4
+read -r x y <<< "${fields[0]}"; adb shell input tap "$x" "$y"; adb shell input text 'FutTopTeste'; adb shell input keyevent 111
+read -r x y <<< "${fields[1]}"; adb shell input tap "$x" "$y"; adb shell input text 'SaoPaulo'; adb shell input keyevent 111
 ui_tap 'COMEÇAR CARREIRA NO BRASIL'
 ui_wait 'PRÓXIMO DESAFIO' 90
 ui_wait 'JOGAR PARTIDA' 45
