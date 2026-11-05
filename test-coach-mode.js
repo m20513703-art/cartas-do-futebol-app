@@ -1,0 +1,15 @@
+'use strict';
+const assert=require('node:assert/strict');
+const coach=require('./coach-mode');
+const players=Array.from({length:14},(_,i)=>({id:`p${i}`,name:`P${i}`,surname:'Teste',role:i<2?'GOL':'MEI',ovr:60+i,energy:100}));
+let g=coach.ensureManagerState({club:'MM FC',players,coins:1000},()=>[]);
+assert.equal(g.lineup.length,11);
+g=coach.startMatch({...g,subsUsed:3}); assert.equal(g.subsUsed,0);
+g=coach.swapStarter(g,'p0','p11'); assert(g.lineup.includes('p11'));assert(!g.lineup.includes('p0'));
+g=coach.substitute(g,'p1','p12',{matchLive:true,paused:true});assert.equal(g.subsUsed,1);assert(g.lineup.includes('p12'));assert(!g.lineup.includes('p1'));
+assert.throws(()=>coach.substitute(g,'p2','p13',{matchLive:true,paused:false}),/Pause/);
+assert.throws(()=>coach.substitute({...g,subsUsed:5},'p2','p13',{matchLive:true,paused:true}),/Limite/);
+const market=[{id:'m1',name:'Rafa',surname:'Mercado',role:'ATA',ovr:75,price:400,wage:40}];g={...g,transferMarket:market,coins:1000};const bought=coach.signPlayer(g,market[0]);assert.equal(bought.coins,600);assert.equal(bought.players.length,15);assert.equal(bought.transferMarket.length,0);
+assert.throws(()=>coach.signPlayer({...g,coins:100},market[0]),/Saldo insuficiente/);
+assert.throws(()=>coach.signPlayer({...g,players:Array(30).fill({id:'x'}),coins:9999},market[0]),/Limite de 30/);
+console.log('Coach mode rules passed.');
