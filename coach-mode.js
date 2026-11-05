@@ -48,8 +48,8 @@ function swapStarter(game, starterId, reserveId) {
   if (!validStartingXI(game.players,lineup)) throw new Error('A alteração não mantém uma escalação válida.');
   return { ...game, lineup };
 }
-function substitute(game, outId, inId, { matchLive, paused, maxSubs = 5 } = {}) {
-  if (!matchLive || !paused) throw new Error('Pause a partida para fazer uma substituição.');
+function substitute(game, outId, inId, { matchLive, paused, halftime = false, maxSubs = 5 } = {}) {
+  if (!(matchLive && paused) && !halftime) throw new Error('Pause a partida para fazer uma substituição ou use o intervalo.');
   if ((game.subsUsed || 0) >= maxSubs) throw new Error('Limite de substituições atingido.');
   if (!(game.lineup || []).includes(outId)) throw new Error('O jogador que sai não está entre os titulares.');
   if ((game.lineup || []).includes(inId)) throw new Error('O jogador que entra já está em campo.');
