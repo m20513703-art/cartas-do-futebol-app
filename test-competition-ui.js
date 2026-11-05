@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const src=fs.readFileSync('App.js','utf8');
 assert.match(src,/tab==='Competições'&&<>[\s\S]*?COMPETIÇÕES JOGÁVEIS/,'competitions must have a dedicated tab');
-assert.match(src,/\['Início','Competições','Classificação','Elenco'\]/,'navigation must clearly expose competitions separately');
+assert.match(src,/\['Início','Competições','Classificação','Elenco','Mercado'\]/,'navigation must clearly expose competitions separately');
 const start=src.indexOf("{tab==='Classificação'&&<>");
 const end=src.indexOf("{tab==='Elenco'",start);
 const classification=src.slice(start,end);
